@@ -34,5 +34,10 @@ namespace GUI_APP_QLThuVien
         {
             SachBUS.Instance.Xem(dgvSach);
         }
+
+        private void lblTittle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
