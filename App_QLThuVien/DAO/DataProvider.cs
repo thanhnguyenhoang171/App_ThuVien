@@ -27,7 +27,8 @@ namespace DAO
 
         public DataProvider() { }
 
-        string connectionString = @"Data Source=LAS_Chanh\LASCHANH; Initial Catalog = QuanLyThuVien; Integrated Security = True";
+        // string ... ket noi may khac
+        string connectionString = @"Data Source=LAPTOP-3RR4R1FA\SQLEXPRESS; Initial Catalog = QuanLyThuVien; Integrated Security = True";
 
         // Trả data theo yêu cầu query
 
