@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAO;
+using DTO;
 
 namespace BUS
 {
@@ -22,7 +23,7 @@ namespace BUS
             }
         }
         private SachBUS() { }
-        public  void Xem(DataGridView data)
+        public void Xem(DataGridView data)
         {
             // Xóa tất cả các cột trong DataGridView trước khi thêm mới
             data.Columns.Clear();
@@ -79,6 +80,21 @@ namespace BUS
             data.Columns.Add(colNamXB);
 
             data.DataSource = SachDAO.Instance.Xem();
+        }
+        public bool Sua (DataGridView data)
+        {
+            DataGridViewRow row = data.SelectedCells[0].OwningRow;
+            string maSach = row.Cells["ma_sach"].Value.ToString();
+            string tenSach = row.Cells["ten_sach"].Value.ToString();
+            string tacGia = row.Cells["tac_gia"].Value.ToString();
+            string theLoai = row.Cells["the_loai"].Value.ToString();
+            int soLuong = Convert.ToInt32(row.Cells["so_luong_hien_co"].Value);
+            string moTa = row.Cells["mo_ta"].Value.ToString();
+            decimal giaSach = Convert.ToDecimal(row.Cells["gia"].Value); 
+            int namXB = Convert.ToInt32(row.Cells["nam_xuat_ban"].Value);
+
+            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
+            return SachDAO.Instance.Sua(maSach, sach);
         }
     }
 }
