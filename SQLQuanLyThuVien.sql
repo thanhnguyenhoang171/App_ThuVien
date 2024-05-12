@@ -1,4 +1,4 @@
-﻿--create database QuanLyThuVien;
+﻿create database QuanLyThuVien;
 
 use QuanLyThuVien
 GO
@@ -25,7 +25,6 @@ GO
 --DELETE FROM Sach;
 GO
 SELECT * FROM Sach;
-s
 GO
 -- Tạo bảng "Library_Cards"
 CREATE TABLE The_thu_vien (
@@ -71,6 +70,7 @@ GO
 SELECT * FROM Muon_tra;
 
 GO
+------------------------------------------------------
 -- Ràng buộc kiểm tra ngày mượn trả
 CREATE TRIGGER Ktra_ngay_muon
 ON Muon_tra
@@ -128,3 +128,14 @@ BEGIN
         ROLLBACK TRANSACTION;
     END;
 END;
+
+-------------------------------------------------------
+-- Thêm ràng buộc Unique Key cho cột ma_sach trong bảng Sach
+ALTER TABLE Sach
+ADD CONSTRAINT UK_ma_sach UNIQUE (ma_sach);
+
+AlTER TABLE The_thu_vien
+ADD CONSTRAINT UK_ma_the_thu_vien UNIQUE (ma_the);
+
+ALTER TABLE Muon_tra
+ADD CONSTRAINT UK_ma_giao_dich UNIQUE (ma_giao_dich);
