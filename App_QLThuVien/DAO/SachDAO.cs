@@ -47,6 +47,15 @@ namespace DAO
 
             return saches;
         }
-        
+        public bool Sua(string maSach, Sach sach) {
+            string query = "UPDATE TABLE Sach set ma_sach = @maSach, ten_sach=@tenSach, tac_gia =@tacGia, the_loai=@theLoai, so_luong_hien_co=@soLuong, mo_ta=@moTa, gia=@giaSach, nam_xuat_ban=@namXB where ma_sach =@maSachCu";
+            object[] para = new object[] {sach.TenSach, sach.TenTacGia, sach.TheLoai, sach.SoLuong, sach.MoTa, sach.GiaSach,sach.NamXB, maSach};
+            if (DataProvider.Instance.ExecuteNonQuery(query, para)>0) {
+                return true;    
+            }
+            return false;
+            
+        }
+
     }
 }

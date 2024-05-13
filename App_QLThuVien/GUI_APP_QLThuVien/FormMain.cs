@@ -39,5 +39,19 @@ namespace GUI_APP_QLThuVien
         {
 
         }
+
+        private void btnSuaSach_Click(object sender, EventArgs e)
+        {
+            if (SachBUS.Instance.Sua(dgvSach))
+            {
+                MessageBox.Show("Sửa dữ liệu Sách thành công!");
+                btnXemSach_Click(sender, e);            
+            }
+            else
+            {
+                MessageBox.Show("Lỗi!");
+            } 
+                
+        }
     }
 }
