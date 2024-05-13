@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DAO
 {
@@ -14,22 +15,23 @@ namespace DAO
         private static DataProvider instance;
         public static DataProvider Instance
         {
-            get
-            {
-                if (instance == null)
+            get { if (instance == null)
                 {
                     instance = new DataProvider();
                 }
-                return instance;
+                return DataProvider.instance;
             }
+            private set { DataProvider.instance = value; }
         }
 
 
         public DataProvider() { }
 
-        // string ... ket noi may khac
-        string connectionString = @"Data Source=LAPTOP-3RR4R1FA\SQLEXPRESS; Initial Catalog = QuanLyThuVien; Integrated Security = True";
+        // Connection String của mnkhue
+        // string connectionString = @"Data Source=LAPTOP-3RR4R1FA\SQLEXPRESS; Initial Catalog = QuanLyThuVien; Integrated Security = True";
 
+        // Connection String của hthanh
+        private string connectionString = @"Data Source=LAS_Chanh\LASCHANH; Initial Catalog = QuanLyThuVien; Integrated Security = True";
         // Trả data theo yêu cầu query
 
         public DataTable ExecuteQuery (string query, object[] parameters = null)
@@ -47,11 +49,20 @@ namespace DAO
                     // Thêm tham số nếu có
                     if (parameters != null)
                     {
-                        AddParameters(command, parameters);
+                        string[] listParameter = query.Split(' ');
+                        int i = 0;
+                        foreach (string param in listParameter)
+                        {
+                            if (param.Contains("@")) {
+                                command.Parameters.AddWithValue(param, parameters[i++]);
+                                i++;
+                            }
+                        }
                     }
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     adapter.Fill(dataTable);
+                    connection.Close();
                 }
             }
             catch (Exception ex)
@@ -78,10 +89,19 @@ namespace DAO
                     // Thêm tham số nếu có
                     if (parameters != null)
                     {
-                        AddParameters(command, parameters);
+                        string[] listParameter = query.Split(' ');
+                        int i = 0;
+                        foreach (string param in listParameter)
+                        {
+                            if (param.Contains('@')) {
+                                command.Parameters.AddWithValue(param, parameters[i]);
+                                i++;
+                                }
+                        }
                     }
 
                     result = command.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
             catch (Exception ex)
@@ -108,10 +128,20 @@ namespace DAO
                     // Thêm tham số nếu có
                     if (parameters != null)
                     {
-                        AddParameters(command, parameters);
+                        string[] listParameter = query.Split(' ');
+                        int i = 0;
+                        foreach (string param in listParameter)
+                        {
+                            if (param.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(param, parameters[i]);
+                                i++;
+                            }
+                        }
                     }
 
                     result = command.ExecuteScalar();
+                    connection.Close();
                 }
             }
             catch (Exception ex)
@@ -124,18 +154,5 @@ namespace DAO
         }
 
         // Hàm hỗ trợ thêm tham số vào SqlCommand
-        private void AddParameters(SqlCommand command, object[] parameters)
-        {
-            string[] parameterList = command.CommandText.Split(' ');
-            int i = 0;
-            foreach (string item in parameterList)
-            {
-                if (item.Contains('@'))
-                {
-                    command.Parameters.AddWithValue(item, parameters[i]);
-                    i++;
-                }
-            }
-        }
     }
 }
