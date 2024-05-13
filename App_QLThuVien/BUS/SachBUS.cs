@@ -25,76 +25,48 @@ namespace BUS
         private SachBUS() { }
         public void Xem(DataGridView data)
         {
-            //// Xóa tất cả các cột trong DataGridView trước khi thêm mới
-            //data.Columns.Clear();
-
-            //// Thiết lập AutoGenerateColumns thành false để ngăn DataGridView tự động tạo cột
-            //data.AutoGenerateColumns = false;
-
-            //// Tạo cột cho Mã Sách
-            //DataGridViewTextBoxColumn colMaSach = new DataGridViewTextBoxColumn();
-            //colMaSach.DataPropertyName = "MaSach";
-            //colMaSach.HeaderText = "Mã Sách";
-            //data.Columns.Add(colMaSach);
-
-            //// Tạo cột cho Tên Sách
-            //DataGridViewTextBoxColumn colTenSach = new DataGridViewTextBoxColumn();
-            //colTenSach.DataPropertyName = "TenSach";
-            //colTenSach.HeaderText = "Tên Sách";
-            //data.Columns.Add(colTenSach);
-
-            //// Tạo cột cho Tác Giả
-            //DataGridViewTextBoxColumn colTacGia = new DataGridViewTextBoxColumn();
-            //colTacGia.DataPropertyName = "TenTacGia";
-            //colTacGia.HeaderText = "Tác Giả";
-            //data.Columns.Add(colTacGia);
-
-            //// Tạo cột cho Thể Loại
-            //DataGridViewTextBoxColumn colTheLoai = new DataGridViewTextBoxColumn();
-            //colTheLoai.DataPropertyName = "TheLoai";
-            //colTheLoai.HeaderText = "Thể Loại";
-            //data.Columns.Add(colTheLoai);
-
-            //// Tạo cột cho Số Lượng Hiện Có
-            //DataGridViewTextBoxColumn colSoLuong = new DataGridViewTextBoxColumn();
-            //colSoLuong.DataPropertyName = "SoLuong";
-            //colSoLuong.HeaderText = "Số Lượng Hiện Có";
-            //data.Columns.Add(colSoLuong);
-
-            //// Tạo cột cho Mô Tả
-            //DataGridViewTextBoxColumn colMoTa = new DataGridViewTextBoxColumn();
-            //colMoTa.DataPropertyName = "MoTa";
-            //colMoTa.HeaderText = "Mô Tả";
-            //data.Columns.Add(colMoTa);
-
-            //// Tạo cột cho Giá
-            //DataGridViewTextBoxColumn colGia = new DataGridViewTextBoxColumn();
-            //colGia.DataPropertyName = "GiaSach";
-            //colGia.HeaderText = "Giá";
-            //data.Columns.Add(colGia);
-
-            //// Tạo cột cho Năm Xuất Bản
-            //DataGridViewTextBoxColumn colNamXB = new DataGridViewTextBoxColumn();
-            //colNamXB.DataPropertyName = "NamXB";
-            //colNamXB.HeaderText = "Năm Xuất Bản";
-            //data.Columns.Add(colNamXB);
-
+            
             data.DataSource = SachDAO.Instance.Xem();
         }
         public bool Sua (DataGridView data)
         {
             DataGridViewRow row = data.SelectedCells[0].OwningRow;
-            string maSach = row.Cells["ma_sach"].Value.ToString();
-            string tenSach = row.Cells["ten_sach"].Value.ToString();
-            string tacGia = row.Cells["tac_gia"].Value.ToString();
-            string theLoai = row.Cells["the_loai"].Value.ToString();
-            int soLuong = Convert.ToInt32(row.Cells["so_luong_hien_co"].Value);
-            string moTa = row.Cells["mo_ta"].Value.ToString();
-            decimal giaSach = Convert.ToDecimal(row.Cells["gia"].Value); 
-            int namXB = Convert.ToInt32(row.Cells["nam_xuat_ban"].Value);
+            
+            string maSach = row.Cells["MaSach"].Value.ToString();
+            string tenSach = row.Cells["TenSach"].Value.ToString();
+            string tacGia = row.Cells["TenTacGia"].Value.ToString();
+            string theLoai = row.Cells["TheLoai"].Value.ToString();
+            int soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
+            string moTa = row.Cells["MoTa"].Value.ToString();
+            decimal giaSach = Convert.ToDecimal(row.Cells["GiaSach"].Value); 
+            int namXB = Convert.ToInt32(row.Cells["NamXB"].Value);
 
             Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
             return SachDAO.Instance.Sua(maSach, sach);
+        }
+        public bool Xoa(DataGridView data)
+        {
+            if (data.SelectedCells.Count > 0)
+            {
+                DataGridViewRow row = data.SelectedCells[0].OwningRow;
+                string maSach = row.Cells["MaSach"].Value.ToString();
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá sách này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    if( SachDAO.Instance.Xoa(maSach))
+                    {
+                        Xem(data);
+                        return true;
+                    }    
+                }
+            }
+            return false;
+        }
+        public bool Them(Sach sach)
+        {
+            return SachDAO.Instance.Them(sach);
         }
     }
 }
