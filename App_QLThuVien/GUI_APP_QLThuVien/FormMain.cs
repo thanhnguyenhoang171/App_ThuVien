@@ -20,7 +20,7 @@ namespace GUI_APP_QLThuVien
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
+            SachBUS.Instance.Xem(dgvSach);
         }
 
       
@@ -32,7 +32,7 @@ namespace GUI_APP_QLThuVien
 
         private void btnXemSach_Click(object sender, EventArgs e)
         {
-            SachBUS.Instance.Xem(dgvSach);
+            //SachBUS.Instance.Xem(dgvSach);
         }
 
         private void lblTittle_Click(object sender, EventArgs e)
