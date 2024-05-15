@@ -64,8 +64,9 @@ namespace BUS
             }
             return false;
         }
-        public bool Them(Sach sach)
+        public bool Them(string maSach, string tenSach, string tacGia, string theLoai, int soLuong, string moTa, decimal giaSach, int namXB)
         {
+            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
             return SachDAO.Instance.Them(sach);
         }
     }

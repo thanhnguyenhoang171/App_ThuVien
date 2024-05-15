@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUS;
-using DTO;
+
 
 namespace GUI_APP_QLThuVien
 {
@@ -22,6 +22,7 @@ namespace GUI_APP_QLThuVien
         private void FormMain_Load(object sender, EventArgs e)
         {
             SachBUS.Instance.Xem(dgvSach);
+            TheThuVienBUS.Instance.Xem(dgvTheThuVien);
         }
 
       
@@ -92,9 +93,7 @@ namespace GUI_APP_QLThuVien
             int namXB = dtpNamXB.Value.Year;
             
 
-            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
-
-            if (SachBUS.Instance.Them(sach))
+            if (SachBUS.Instance.Them(maSach,tenSach,tacGia,theLoai,soLuong,moTa,giaSach,namXB))
             {
                 MessageBox.Show("Thêm Sách thành công!");
                 SachBUS.Instance.Xem(dgvSach);
@@ -107,6 +106,21 @@ namespace GUI_APP_QLThuVien
         }
 
         private void txtTenSach_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblQLTheTV_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvTheThuVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
