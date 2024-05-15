@@ -45,5 +45,25 @@ namespace BUS
             TheThuVien theThuVien = new TheThuVien(maThe,hoTen,diaChi,dienThoai,email,ngayDK,ngayHH);
             return TheThuVienDAO.Instance.Them(theThuVien);
         }
+        public bool Xoa(DataGridView data)
+        {
+            if (data.SelectedCells.Count > 0)
+            {
+                DataGridViewRow row = data.SelectedCells[0].OwningRow;
+                string maThe = row.Cells["MaThe"].Value.ToString();
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá thẻ thư viện này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (TheThuVienDAO.Instance.Xoa(maThe))
+                    {
+                        Xem(data);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

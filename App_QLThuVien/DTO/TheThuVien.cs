@@ -32,7 +32,7 @@ namespace DTO
         public DateTime NgayHH
         { get { return ngayHH; } set { ngayHH = value; } }
 
-        public TheThuVien(string maThe, string hoTen, string diaChi, string email, string dienThoai, DateTime ngayDK, DateTime ngayHH)
+        public TheThuVien(string maThe, string hoTen, string diaChi, string dienThoai, string email, DateTime ngayDK, DateTime ngayHH)
         {
             this.MaThe = maThe;
             this.HoTen = hoTen;
