@@ -21,8 +21,8 @@ namespace GUI_APP_QLThuVien
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SachBUS.Instance.Xem(dgvSach);
-            TheThuVienBUS.Instance.Xem(dgvTheThuVien);
+            SachBUS.Instance.Xem(dGVSach);
+            TheThuVienBUS.Instance.Xem(dGVTheThuVien);
         }
 
       
@@ -44,7 +44,7 @@ namespace GUI_APP_QLThuVien
 
         private void btnSuaSach_Click(object sender, EventArgs e)
         {
-            if (SachBUS.Instance.Sua(dgvSach))
+            if (SachBUS.Instance.Sua(dGVSach))
             {
                 MessageBox.Show("Sửa dữ liệu Sách thành công!");
                      
@@ -58,7 +58,7 @@ namespace GUI_APP_QLThuVien
 
         private void btnXoaSach_Click(object sender, EventArgs e)
         {
-            if (SachBUS.Instance.Xoa(dgvSach))
+            if (SachBUS.Instance.Xoa(dGVSach))
             {
                 MessageBox.Show("Xoá dữ liệu Sách thành công!");
             } else
@@ -96,7 +96,7 @@ namespace GUI_APP_QLThuVien
             if (SachBUS.Instance.Them(maSach,tenSach,tacGia,theLoai,soLuong,moTa,giaSach,namXB))
             {
                 MessageBox.Show("Thêm Sách thành công!");
-                SachBUS.Instance.Xem(dgvSach);
+                SachBUS.Instance.Xem(dGVSach);
             }
             else
             {
@@ -121,6 +121,49 @@ namespace GUI_APP_QLThuVien
         }
 
         private void dgvTheThuVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnSuaTheThuVien_Click(object sender, EventArgs e)
+        {
+            if (TheThuVienBUS.Instance.Sua(dGVTheThuVien))
+            {
+                MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thành công!");
+
+            }
+            else
+            {
+                MessageBox.Show("Lỗi!");
+            }
+        }
+
+        private void btnThemTheThuVien_Click(object sender, EventArgs e)
+        {
+            string maThe = txtMaThe.Text;
+            string hoTen = txtHoTen.Text;
+            string diaChi = txtDiaChi.Text;
+            string dienThoai = txtDienThoai.Text;
+            string email = txtEmail.Text;
+            DateTime ngayDK = dtpNgayDK.Value; // Không cần chuyển đổi ở đây
+            DateTime ngayHH = dtpNgayHH.Value; // Không cần chuyển đổi ở đây
+
+            string ngayDKFormatted = ngayDK.ToString("yyyy-MM-dd");
+            string ngayHHFormatted = ngayHH.ToString("yyyy-MM-dd");
+
+            if (TheThuVienBUS.Instance.Them(maThe, hoTen, diaChi, dienThoai, email, ngayDKFormatted, ngayHHFormatted))
+            {
+                MessageBox.Show("Thêm Thẻ Thư Viện thành công!");
+                TheThuVienBUS.Instance.Xem(dGVTheThuVien);
+            }
+            else
+            {
+                MessageBox.Show("Thêm Thẻ Thư Viện thất bại!");
+            }
+
+        }
+
+        private void btnXoaTheThuVien_Click(object sender, EventArgs e)
         {
 
         }
