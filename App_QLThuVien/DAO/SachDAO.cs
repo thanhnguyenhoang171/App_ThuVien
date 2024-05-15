@@ -25,7 +25,7 @@ namespace DAO
         {
             List <Sach> saches = new List<Sach>();
             string query = "SELECT * FROM Sach";
-            ;
+      
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
