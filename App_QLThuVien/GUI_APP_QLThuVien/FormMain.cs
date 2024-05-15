@@ -148,10 +148,7 @@ namespace GUI_APP_QLThuVien
             DateTime ngayDK = dtpNgayDK.Value; // Không cần chuyển đổi ở đây
             DateTime ngayHH = dtpNgayHH.Value; // Không cần chuyển đổi ở đây
 
-            string ngayDKFormatted = ngayDK.ToString("yyyy-MM-dd");
-            string ngayHHFormatted = ngayHH.ToString("yyyy-MM-dd");
-
-            if (TheThuVienBUS.Instance.Them(maThe, hoTen, diaChi, dienThoai, email, ngayDKFormatted, ngayHHFormatted))
+            if (TheThuVienBUS.Instance.Them(maThe, hoTen, diaChi, dienThoai, email, ngayDK, ngayHH))
             {
                 MessageBox.Show("Thêm Thẻ Thư Viện thành công!");
                 TheThuVienBUS.Instance.Xem(dGVTheThuVien);
@@ -165,7 +162,15 @@ namespace GUI_APP_QLThuVien
 
         private void btnXoaTheThuVien_Click(object sender, EventArgs e)
         {
+            if (TheThuVienBUS.Instance.Xoa(dGVTheThuVien))
+            {
+                MessageBox.Show("Xoá dữ liệu Thẻ Thư Viện thành công!");
+            }
+            else
+            {
+                MessageBox.Show("                                Lỗi!" + Environment.NewLine + "Có thể thẻ thư viện này đang mượn sách");
 
+            }
         }
     }
 }

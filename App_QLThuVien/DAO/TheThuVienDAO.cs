@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DTO;
+
 namespace DAO
 {
     public class TheThuVienDAO
@@ -58,8 +59,18 @@ namespace DAO
         }
         public bool Them(TheThuVien theThuVien)
         {
-            string query = "INSERT INTO The_thu_vien ( ma_the , ho_va_ten , dia_chi , so_dien_thoai , email , ngay_dang_ky , ngay_het_han ) VALUES ( @MaThe , @HoTen , @DiaChi , @DienThoai , @Email , @NgayDK , @NgayHH )";
+            string query = " INSERT INTO The_thu_vien ( ma_the , ho_va_ten , dia_chi , so_dien_thoai , email , ngay_dang_ky , ngay_het_han ) VALUES ( @MaThe , @HoTen , @DiaChi , @DienThoai , @Email , @NgayDK , @NgayHH )";
             object[] para = new object[] { theThuVien.MaThe, theThuVien.HoTen, theThuVien.DiaChi, theThuVien.DienThoai, theThuVien.Email, theThuVien.NgayDK, theThuVien.NgayHH};
+            if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool Xoa(string maThe)
+        {
+            string query = " DELETE FROM The_thu_vien WHERE ma_the = @MaThe ";
+            object[] para = new object[] { maThe };
             if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
             {
                 return true;
