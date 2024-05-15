@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAO;
+using DTO;
 namespace BUS
 {
     public class TheThuVienBUS
@@ -25,6 +26,24 @@ namespace BUS
         public void Xem(DataGridView data)
         {
             data.DataSource = TheThuVienDAO.Instance.Xem();
+        }
+        public bool Sua(DataGridView data)
+        {
+            DataGridViewRow row = data.SelectedCells[0].OwningRow;
+            string maThe = row.Cells["MaThe"].Value.ToString();
+            string hoTen = row.Cells["HoTen"].Value.ToString();
+            string diaChi = row.Cells["DiaChi"].Value.ToString();
+            string dienThoai = row.Cells["DienThoai"].Value.ToString();
+            string email = row.Cells["Email"].Value.ToString();
+            DateTime ngayDK = Convert.ToDateTime(row.Cells["NgayDK"].Value);
+            DateTime ngayHH = Convert.ToDateTime(row.Cells["NgayHH"].Value);
+            TheThuVien theThuVien = new TheThuVien (maThe, hoTen, diaChi, dienThoai, email, ngayDK, ngayHH);
+            return TheThuVienDAO.Instance.Sua(maThe, theThuVien);
+        }
+        public bool Them(string maThe, string hoTen, string diaChi, string dienThoai, string email, DateTime ngayDK, DateTime ngayHH)
+        {
+            TheThuVien theThuVien = new TheThuVien(maThe,hoTen,diaChi,dienThoai,email,ngayDK,ngayHH);
+            return TheThuVienDAO.Instance.Them(theThuVien);
         }
     }
 }
