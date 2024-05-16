@@ -23,6 +23,7 @@ namespace GUI_APP_QLThuVien
         {
             SachBUS.Instance.Xem(dGVSach);
             TheThuVienBUS.Instance.Xem(dGVTheThuVien);
+            MuonTraBUS.Instance.Xem(dGVMuonTra);
         }
 
       
@@ -170,6 +171,61 @@ namespace GUI_APP_QLThuVien
             {
                 MessageBox.Show("                                Lỗi!" + Environment.NewLine + "Có thể thẻ thư viện này đang mượn sách");
 
+            }
+        }
+
+        private void panelSach_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblTittleSachMN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThemMuonTra_Click(object sender, EventArgs e)
+        {
+            string maGiaoDich = txtMaGD.Text;
+            string maSach = txtMaSach.Text;
+            string maThe = txtMaThe.Text;
+            
+            DateTime ngayMuon = dtpNgayMuon.Value; 
+            DateTime ngayTra = dtpNgayTra.Value;
+            string trangThai = txtTrangThai.Text;
+            decimal tienPhat;
+            if (!decimal.TryParse(txtTienPhat.Text, out tienPhat))
+            {
+                MessageBox.Show("Số tiền phạt không hợp lệ. Vui lòng nhập số thập phân.");
+                return;
+            }
+
+            if (MuonTraBUS.Instance.Them(maGiaoDich, maSach, maThe, ngayMuon,ngayTra, tienPhat, trangThai))
+            {
+                MessageBox.Show("Thêm Thẻ Thư Viện thành công!");
+                MuonTraBUS.Instance.Xem(dGVMuonTra);
+            }
+            else
+            {
+                MessageBox.Show("Lỗi!");
+            }
+        }
+
+        private void btnXoaMuonTra_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSuaMuonTra_Click(object sender, EventArgs e)
+        {
+            if (MuonTraBUS.Instance.Sua(dGVMuonTra))
+            {
+                MessageBox.Show("Sửa dữ liệu Mượn trả thành công!");
+
+            }
+            else
+            {
+                MessageBox.Show("Lỗi!");
             }
         }
     }
