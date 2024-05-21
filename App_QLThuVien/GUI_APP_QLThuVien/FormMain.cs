@@ -47,7 +47,7 @@ namespace GUI_APP_QLThuVien
             txtMaThe.Clear();
             txtMaTheMT.Clear();
             txtTienPhat.Clear();
-            txtTrangThai.Clear();
+      
             
         }
 
@@ -289,12 +289,12 @@ namespace GUI_APP_QLThuVien
         private void btnThemMuonTra_Click(object sender, EventArgs e)
         {
             string maGiaoDich = txtMaGD.Text;
-            string maSach = txtMaSach.Text;
-            string maThe = txtMaThe.Text;
+            string maSach = txtMaSachMT.Text;
+            string maThe = txtMaTheMT.Text;
             
             DateTime ngayMuon = dtpNgayMuon.Value; 
             DateTime ngayTra = dtpNgayTra.Value;
-            string trangThai = txtTrangThai.Text;
+            string trangThai = cbxTrangThai.Text;
             decimal tienPhat;
             // Kiểm tra dữ liệu
             if (maGiaoDich.Length > 5)
@@ -324,16 +324,17 @@ namespace GUI_APP_QLThuVien
                 MessageBox.Show("Số Tiền Phạt phải là số không âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             if (MuonTraBUS.Instance.Them(maGiaoDich, maSach, maThe, ngayMuon,ngayTra, tienPhat, trangThai))
             {
                 MessageBox.Show("Thêm Mượn Trả thành công!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MuonTraBUS.Instance.Xem(dGVMuonTra);
+                SachBUS.Instance.Xem(dGVSach);
                 LamMoiTextbox();
             }
             else
             {
-                MessageBox.Show("Thêm Mượn Trả thất bại.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Số Lượng hiện có cho sách này đã hết không thể mượn", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -355,12 +356,11 @@ namespace GUI_APP_QLThuVien
             if (MuonTraBUS.Instance.Sua(dGVMuonTra))
             {
                 MessageBox.Show("Sửa dữ liệu Mượn trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-
+                SachBUS.Instance.Xem(dGVSach);
             }
             else
             {
-                MessageBox.Show("Sửa dữ liệu Mượn trả thất bại", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Không thể sửa đổi Mượn trả có thể do số lượng hiện có của sách đã hết hoặc bạn đã nhập sai dữ liệu sửa đổi", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             MuonTraBUS.Instance.Xem(dGVMuonTra);
         }
@@ -368,6 +368,16 @@ namespace GUI_APP_QLThuVien
         private void dGVMuonTra_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/thanhnguyenhoang171/BT_QTCSDL_App_ThuVien");
         }
     }
 }
