@@ -1,4 +1,4 @@
-﻿create database QuanLyThuVien;
+create database QuanLyThuVien;
 
 GO
 
