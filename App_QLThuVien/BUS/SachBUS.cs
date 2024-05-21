@@ -51,16 +51,17 @@ namespace BUS
                 DataGridViewRow row = data.SelectedCells[0].OwningRow;
                 string maSach = row.Cells["MaSach"].Value.ToString();
 
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá sách này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá Sách này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    if( SachDAO.Instance.Xoa(maSach))
+                    if (SachDAO.Instance.Xoa(maSach))
                     {
                         Xem(data);
                         return true;
-                    }    
+                    }
                 }
+
             }
             return false;
         }

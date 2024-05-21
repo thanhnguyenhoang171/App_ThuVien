@@ -48,5 +48,25 @@ namespace BUS
             MuonTra muonTra = new MuonTra(maGiaoDich, maSach, maThe, ngayMuon, ngayTra, tienPhat, trangThai);
             return MuonTraDAO.Instance.Them(muonTra);
         }
+        public bool Xoa (DataGridView data)
+        {
+            if (data.SelectedCells.Count > 0)
+            {
+                DataGridViewRow row = data.SelectedCells[0].OwningRow;
+                string maGiaoDich = row.Cells["MaGiaoDich"].Value.ToString();
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá giao dịch mượn trả này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (MuonTraDAO.Instance.Xoa(maGiaoDich))
+                    {
+                        Xem(data);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

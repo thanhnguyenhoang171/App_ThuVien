@@ -48,9 +48,9 @@ namespace DAO
         }
         public bool Sua(string maGiaoDich, MuonTra muonTra)
         {
-            string query = " UPDATE Muon_tra SET ma_sach = @MaSach , ma_the = @MaThe , ngay_muon = @NgayMuon , ngay_tra = @NgayTra , so_tien_phat = @SoTienPhat where ma_giao_dich = @MaGiaoDichCu ";
+            string query = " UPDATE Muon_tra SET ma_sach = @MaSach , ma_the = @MaThe , ngay_muon = @NgayMuon , ngay_tra = @NgayTra , so_tien_phat = @SoTienPhat , trang_thai = @TrangThai WHERE ma_giao_dich = @MaGiaoDichCu ";
 
-            object[] para = new object[] { muonTra.MaSach, muonTra.MaThe, muonTra.NgayMuon, muonTra.NgayTra, muonTra.SoTienPhat, maGiaoDich };
+            object[] para = new object[] {muonTra.MaSach, muonTra.MaThe, muonTra.NgayMuon, muonTra.NgayTra, muonTra.SoTienPhat, muonTra.TrangThai, maGiaoDich };
             if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
             {
                 return true;
@@ -61,6 +61,16 @@ namespace DAO
         {
             string query = " INSERT INTO Muon_tra ( ma_giao_dich , ma_sach , ma_the , ngay_muon , ngay_tra , so_tien_phat , trang_thai ) VALUES ( @MaGiaoDich , @MaSach , @MaThe , @NgayMuon , @NgayTra , @SoTienPhat , @TrangThai )";
             object[] para = new object[] { muonTra.MaGiaoDich, muonTra.MaSach, muonTra.MaThe, muonTra.NgayMuon, muonTra.NgayTra, muonTra.SoTienPhat, muonTra.TrangThai };
+            if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool Xoa (string maGiaoDich)
+        {
+            string query = " DELETE FROM Muon_tra WHERE ma_giao_dich = @MaGiaoDich ";
+            object[] para = new object[] { maGiaoDich };
             if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
             {
                 return true;
