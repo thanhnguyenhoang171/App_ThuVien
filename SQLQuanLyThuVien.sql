@@ -11,10 +11,10 @@ CREATE TABLE Sach (
     ten_sach NVARCHAR(255),
     tac_gia NVARCHAR(100),
     the_loai NVARCHAR(150),
-    so_luong_hien_co INT,
+    so_luong_hien_co INT CHECK (so_luong_hien_co >= 0),
     mo_ta NVARCHAR(150),
-    gia DECIMAL(10, 2),
-    nam_xuat_ban INT
+    gia DECIMAL(10, 2) CHECK (gia >= 0),
+    nam_xuat_ban INT CHECK (nam_xuat_ban >= 0)
 );
 GO
 -- Thêm dữ liệu vào bảng Sách
@@ -37,12 +37,12 @@ CREATE TABLE The_thu_vien (
     ma_the VARCHAR(5) PRIMARY KEY,
     ho_va_ten NVARCHAR(100),
     dia_chi NVARCHAR(255),
-    so_dien_thoai VARCHAR(10),
+    so_dien_thoai VARCHAR(10) CHECK (LEN(so_dien_thoai) = 10),
     email VARCHAR(255),
     ngay_dang_ky DATE,
-    ngay_het_han DATE
+    ngay_het_han DATE,
 );
-GO
+
 -- Thêm dữ liệu vào bảng Thẻ thư viện
 INSERT INTO The_thu_vien (ma_the, ho_va_ten, dia_chi, so_dien_thoai, email, ngay_dang_ky, ngay_het_han)
 VALUES 
@@ -62,12 +62,16 @@ CREATE TABLE Muon_tra (
     ma_the VARCHAR(5),
     ngay_muon DATE,
     ngay_tra DATE,
-    so_tien_phat DECIMAL(10, 2),
+    so_tien_phat DECIMAL(10, 2) CHECK (so_tien_phat >= 0),
     trang_thai NVARCHAR(50),
     FOREIGN KEY (ma_sach) REFERENCES Sach(ma_sach),
-    FOREIGN KEY (ma_the) REFERENCES The_thu_vien(ma_the)
+    FOREIGN KEY (ma_the) REFERENCES The_thu_vien(ma_the),
+	CONSTRAINT CHK_NgayTra CHECK (ngay_tra >= ngay_muon),
+    CONSTRAINT CHK_TrangThai CHECK (trang_thai IN (N'Chưa trả', N'Đã trả'))
 );
 GO
+
+
 -- Thêm dữ liệu vào bảng mượn trả
 INSERT INTO Muon_tra (ma_giao_dich, ma_sach, ma_the, ngay_muon, ngay_tra, so_tien_phat, trang_thai)
 VALUES
@@ -84,64 +88,165 @@ VALUES
     ('M010', 'S002', 'T004', '2024-07-05', '2024-07-12', 0, N'Đã trả');
 
 GO
+
+
 -- Truy vấn
 SELECT * FROM Sach;
 SELECT * FROM The_thu_vien;
-SELECT * FROM Muon_tra;
+SELECT * FROM Muon_tra where trang_thai = N'Chưa trả';
 
 GO
-------------------------------------------------------
--- Ràng buộc kiểm tra ngày mượn trả
-CREATE TRIGGER Ktra_ngay_muon
-ON Muon_tra
-AFTER INSERT
-AS
-BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM Muon_tra AS m
-        WHERE m.ngay_muon > m.ngay_tra
-    )
-    BEGIN
-        RAISERROR ('Ngày mượn phải trước ngày trả', 16, 1);
-        ROLLBACK TRANSACTION;
-    END;
-END;
-
-GO
-
---Ràng buộc số lượng sách không âm
-CREATE TRIGGER Kiem_tra_sach_ko_am
-ON Sach
-AFTER UPDATE
-AS
-BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM inserted
-        WHERE so_luong_hien_co < 0
-    )
-    BEGIN
-        RAISERROR('Số lượng sách không được âm', 16, 1);
-        ROLLBACK TRANSACTION;
-    END;
-END;
 
 -------------------------------------------------------
 -- Thêm ràng buộc Unique Key cho cột ma_sach trong bảng Sach
 ALTER TABLE Sach
 ADD CONSTRAINT UK_ma_sach UNIQUE (ma_sach);
 
+GO
+
 AlTER TABLE The_thu_vien
 ADD CONSTRAINT UK_ma_the_thu_vien UNIQUE (ma_the);
+
+GO
 
 ALTER TABLE Muon_tra
 ADD CONSTRAINT UK_ma_giao_dich UNIQUE (ma_giao_dich);
 
+GO
 
-----
+-- Ràng buộc xoá thể thì xoá mượn trả
 ALTER TABLE Muon_tra
 DROP CONSTRAINT IF EXISTS FK_ma_the;
 
 ALTER TABLE Muon_tra
 ADD CONSTRAINT FK_ma_the FOREIGN KEY (ma_the) REFERENCES The_thu_vien(ma_the) ON DELETE CASCADE;
+
+GO
+
+-- Ràng buộc không cho xoá sách nếu có người đang mượn mà chưa trả (chỉ cho phép xoá khi các giao dịch mượn trả của sách đó là đã trả)
+-- Xóa trigger nếu đã tồn tại trước đó
+IF OBJECT_ID('TR_Sach_Delete') IS NOT NULL
+    DROP TRIGGER TR_Sach_Delete;
+GO
+
+CREATE TRIGGER TR_Sach_Delete
+ON Sach
+INSTEAD OF DELETE
+AS
+BEGIN
+    -- Xóa các giao dịch mượn trả có trạng thái 'Đã trả'
+    DELETE FROM Muon_tra
+    WHERE ma_sach IN (SELECT ma_sach FROM deleted)
+    AND trang_thai = N'Đã trả';
+
+    -- Kiểm tra nếu vẫn còn giao dịch mượn trả ở trạng thái 'Chưa trả'
+    IF EXISTS (
+        SELECT 1
+        FROM Muon_tra
+        WHERE ma_sach IN (SELECT ma_sach FROM deleted)
+        AND trang_thai = N'Chưa trả'
+    )
+    BEGIN
+        -- Nếu có, ngăn chặn việc xóa sách
+        RAISERROR ('Không thể xóa sách có giao dịch mượn trả chưa hoàn tất.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        -- Nếu không có giao dịch nào ở trạng thái 'Chưa trả', cho phép xóa sách
+        DELETE FROM Sach WHERE ma_sach IN (SELECT ma_sach FROM deleted);
+    END
+END;
+GO
+
+
+select * from Muon_tra where ma_sach = 'S001';
+
+-- Tạo ràng buộc khi thêm mượn trả thì sách mượn ('Chưa trả) có số lượng hiện có -1 và ngược lại
+IF OBJECT_ID('trgAfterInsertMuonTra') IS NOT NULL
+    DROP TRIGGER trgAfterInsertMuonTra;
+GO
+
+CREATE TRIGGER trgAfterInsertMuonTra
+ON Muon_tra
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @ma_sach VARCHAR(5),
+            @trang_thai NVARCHAR(50),
+            @so_luong_hien_co INT;
+
+    SELECT @ma_sach = i.ma_sach, @trang_thai = i.trang_thai
+    FROM inserted i;
+
+    IF @trang_thai = N'Chưa trả'
+    BEGIN
+        SELECT @so_luong_hien_co = so_luong_hien_co
+        FROM Sach
+        WHERE ma_sach = @ma_sach;
+
+        IF @so_luong_hien_co <= 0
+        BEGIN
+            RAISERROR (N'Số lượng hiện có của sách không đủ để mượn.', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co - 1
+        WHERE ma_sach = @ma_sach;
+    END
+    ELSE IF @trang_thai = N'Đã trả'
+    BEGIN
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co + 1
+        WHERE ma_sach = @ma_sach;
+    END
+END
+GO
+
+
+-- Tạo ràng buộc nếu sửa trạng thái 'Chưa trả' thành 'Đã trả' thì số lượng hiện có + 1 và ngược lại
+IF OBJECT_ID('trgAfterUpdateMuonTra') IS NOT NULL
+    DROP TRIGGER trgAfterUpdateMuonTra;
+GO
+
+CREATE TRIGGER trgAfterUpdateMuonTra
+ON Muon_tra
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @ma_sach VARCHAR(5),
+            @old_trang_thai NVARCHAR(50),
+            @new_trang_thai NVARCHAR(50),
+            @so_luong_hien_co INT;
+
+    SELECT @ma_sach = i.ma_sach, @old_trang_thai = d.trang_thai, @new_trang_thai = i.trang_thai
+    FROM inserted i
+    JOIN deleted d ON i.ma_giao_dich = d.ma_giao_dich;
+
+    IF @old_trang_thai = N'Chưa trả' AND @new_trang_thai = N'Đã trả'
+    BEGIN
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co + 1
+        WHERE ma_sach = @ma_sach;
+    END
+    ELSE IF @old_trang_thai = N'Đã trả' AND @new_trang_thai = N'Chưa trả'
+    BEGIN
+        SELECT @so_luong_hien_co = so_luong_hien_co
+        FROM Sach
+        WHERE ma_sach = @ma_sach;
+
+        IF @so_luong_hien_co <= 0
+        BEGIN
+            RAISERROR (N'Số lượng hiện có của sách không đủ để mượn.', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co - 1
+        WHERE ma_sach = @ma_sach;
+    END
+END
+GO
