@@ -59,7 +59,7 @@ namespace DAO
         }
         public bool Them(MuonTra muonTra)
         {
-            string query = " INSERT INTO Muon_tra ( ma_giao_dich , ma_sach , ma_the , ngay_muon , ngay_tra , so_tien_phat , trang_thai ) VALUES ( @MaGiaoDich , @MaSach , @MaThe , @NgayMuon , @NgayTra , @SoTienPhat , @TrangThai )";
+            string query = " INSERT INTO Muon_tra ( ma_giao_dich , ma_sach , ma_the , ngay_muon , ngay_tra , so_tien_phat , trang_thai ) VALUES ( @MaGiaoDich , @MaSach , @MaThe , @NgayMuon , @NgayTra , @SoTienPhat , @TrangThai ) ";
             object[] para = new object[] { muonTra.MaGiaoDich, muonTra.MaSach, muonTra.MaThe, muonTra.NgayMuon, muonTra.NgayTra, muonTra.SoTienPhat, muonTra.TrangThai };
             if (DataProvider.Instance.ExecuteNonQuery(query, para) > 0)
             {
