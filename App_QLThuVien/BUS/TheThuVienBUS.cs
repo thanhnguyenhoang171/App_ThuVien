@@ -52,7 +52,7 @@ namespace BUS
                 DataGridViewRow row = data.SelectedCells[0].OwningRow;
                 string maThe = row.Cells["MaThe"].Value.ToString();
 
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá thẻ thư viện này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá Thẻ Thư Viện này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
