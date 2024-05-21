@@ -1,4 +1,4 @@
-﻿create database QuanLyThuVien;
+create database QuanLyThuVien;
 
 GO
 
@@ -88,6 +88,8 @@ VALUES
     ('M010', 'S002', 'T004', '2024-07-05', '2024-07-12', 0, N'Đã trả');
 
 GO
+
+
 -- Truy vấn
 SELECT * FROM Sach;
 SELECT * FROM The_thu_vien;
@@ -159,3 +161,92 @@ GO
 
 
 select * from Muon_tra where ma_sach = 'S001';
+
+-- Tạo ràng buộc khi thêm mượn trả thì sách mượn ('Chưa trả) có số lượng hiện có -1 và ngược lại
+IF OBJECT_ID('trgAfterInsertMuonTra') IS NOT NULL
+    DROP TRIGGER trgAfterInsertMuonTra;
+GO
+
+CREATE TRIGGER trgAfterInsertMuonTra
+ON Muon_tra
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @ma_sach VARCHAR(5),
+            @trang_thai NVARCHAR(50),
+            @so_luong_hien_co INT;
+
+    SELECT @ma_sach = i.ma_sach, @trang_thai = i.trang_thai
+    FROM inserted i;
+
+    IF @trang_thai = N'Chưa trả'
+    BEGIN
+        SELECT @so_luong_hien_co = so_luong_hien_co
+        FROM Sach
+        WHERE ma_sach = @ma_sach;
+
+        IF @so_luong_hien_co <= 0
+        BEGIN
+            RAISERROR (N'Số lượng hiện có của sách không đủ để mượn.', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co - 1
+        WHERE ma_sach = @ma_sach;
+    END
+    ELSE IF @trang_thai = N'Đã trả'
+    BEGIN
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co + 1
+        WHERE ma_sach = @ma_sach;
+    END
+END
+GO
+
+
+-- Tạo ràng buộc nếu sửa trạng thái 'Chưa trả' thành 'Đã trả' thì số lượng hiện có + 1 và ngược lại
+IF OBJECT_ID('trgAfterUpdateMuonTra') IS NOT NULL
+    DROP TRIGGER trgAfterUpdateMuonTra;
+GO
+
+CREATE TRIGGER trgAfterUpdateMuonTra
+ON Muon_tra
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @ma_sach VARCHAR(5),
+            @old_trang_thai NVARCHAR(50),
+            @new_trang_thai NVARCHAR(50),
+            @so_luong_hien_co INT;
+
+    SELECT @ma_sach = i.ma_sach, @old_trang_thai = d.trang_thai, @new_trang_thai = i.trang_thai
+    FROM inserted i
+    JOIN deleted d ON i.ma_giao_dich = d.ma_giao_dich;
+
+    IF @old_trang_thai = N'Chưa trả' AND @new_trang_thai = N'Đã trả'
+    BEGIN
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co + 1
+        WHERE ma_sach = @ma_sach;
+    END
+    ELSE IF @old_trang_thai = N'Đã trả' AND @new_trang_thai = N'Chưa trả'
+    BEGIN
+        SELECT @so_luong_hien_co = so_luong_hien_co
+        FROM Sach
+        WHERE ma_sach = @ma_sach;
+
+        IF @so_luong_hien_co <= 0
+        BEGIN
+            RAISERROR (N'Số lượng hiện có của sách không đủ để mượn.', 16, 1);
+            ROLLBACK TRANSACTION;
+            RETURN;
+        END
+
+        UPDATE Sach
+        SET so_luong_hien_co = so_luong_hien_co - 1
+        WHERE ma_sach = @ma_sach;
+    END
+END
+GO
