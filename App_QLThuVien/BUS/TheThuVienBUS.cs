@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,41 @@ namespace BUS
             }
         }
         private TheThuVienBUS() { }
+        public DataTable ChuyenListSangDGV(List<TheThuVien> theThuVien)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ma_the", typeof(string));
+            dt.Columns.Add("ho_va_ten", typeof(string));
+            dt.Columns.Add("dia_chi", typeof(string));
+            dt.Columns.Add("so_dien_thoai", typeof(string));
+            dt.Columns.Add("email", typeof(string));
+            dt.Columns.Add("ngay_dang_ky", typeof(DateTime));
+            dt.Columns.Add("ngay_het_han", typeof(DateTime));
 
+
+            foreach (var the in theThuVien)
+            {
+                dt.Rows.Add(the.MaThe, the.HoTen, the.DiaChi, the.DienThoai, the.Email, the.NgayDK, the.NgayHH);
+            }
+            return dt;
+        }
         public void Xem(DataGridView data)
         {
-            data.DataSource = TheThuVienDAO.Instance.Xem();
+            List<TheThuVien> the = TheThuVienDAO.Instance.Xem();
+
+            DataTable dt = ChuyenListSangDGV(the);
+
+            data.DataSource = dt;
+
+            data.Columns["ma_the"].HeaderText = "Mã Thẻ";
+            data.Columns["ho_va_ten"].HeaderText = "Họ Tên";
+            data.Columns["dia_chi"].HeaderText = "Địa Chỉ";
+            data.Columns["so_dien_thoai"].HeaderText = "Số Điện Thoại";
+            data.Columns["email"].HeaderText = "Email";
+            data.Columns["ngay_dang_ky"].HeaderText = "Ngày Đăng Ký";
+            data.Columns["ngay_het_han"].HeaderText = "Ngày Hết Hạn";
+        
+            // data.DataSource = TheThuVienDAO.Instance.Xem();
         }
         public bool Sua(DataGridView data)
         {

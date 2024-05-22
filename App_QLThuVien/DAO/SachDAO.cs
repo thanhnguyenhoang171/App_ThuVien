@@ -31,6 +31,8 @@ namespace DAO
 
             foreach (DataRow item in data.Rows)
             {
+             
+
                 string maSach = item["ma_sach"].ToString();
                 string tenSach = item["ten_sach"].ToString();
                 string tacGia = item["tac_gia"].ToString();
@@ -40,6 +42,7 @@ namespace DAO
                 decimal giaSach = (decimal)item["gia"];
                 int namXB = (int)item["nam_xuat_ban"];
 
+
                 Sach newSach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
 
                 saches.Add(newSach);
@@ -47,6 +50,8 @@ namespace DAO
 
             return saches;
         }
+
+  
         public bool Sua(string maSach, Sach sach) {
             string query = " UPDATE Sach SET ten_sach = @TenSach , tac_gia = @TenTacGia , the_loai = @TheLoai , so_luong_hien_co = @SoLuong , mo_ta = @MoTa , gia = @GiaSach , nam_xuat_ban = @NamXB where ma_sach = @MaSachCu ";
             object[] para = new object[] {sach.TenSach, sach.TenTacGia, sach.TheLoai, sach.SoLuong, sach.MoTa, sach.GiaSach,sach.NamXB, maSach};
