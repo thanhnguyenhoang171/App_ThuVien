@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,44 @@ namespace BUS
             }
         }
         private MuonTraBUS() { }
-        public void Xem(DataGridView data)
+
+        public DataTable ChuyenListSangDGV(List<MuonTra> muonTra)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ma_giao_dich", typeof(string));
+            dt.Columns.Add("ma_sach", typeof(string));
+            dt.Columns.Add("ma_the", typeof(string));
+            dt.Columns.Add("ngay_muon", typeof(DateTime));
+            dt.Columns.Add("ngay_tra", typeof(DateTime));
+            dt.Columns.Add("so_tien_phat", typeof(Decimal));
+            dt.Columns.Add("trang_thai", typeof(string));
+
+
+            foreach (var muontra in muonTra)
+            {
+                dt.Rows.Add(muontra.MaGiaoDich, muontra.MaSach, muontra.MaThe, muontra.NgayMuon, muontra.NgayTra, muontra.SoTienPhat, muontra.TrangThai);
+            }
+                return dt;
+            
+        }
+            public void Xem(DataGridView data)
         {
 
-            data.DataSource = MuonTraDAO.Instance.Xem();
+            List<MuonTra> muonTra = MuonTraDAO.Instance.Xem();
+
+            DataTable dt = ChuyenListSangDGV(muonTra);
+
+            data.DataSource = dt;
+
+            data.Columns["ma_giao_dich"].HeaderText = "Mã Giao Dịch";
+            data.Columns["ma_sach"].HeaderText = "Mã Sách";
+            data.Columns["ma_the"].HeaderText = "Mã Thẻ";
+            data.Columns["ngay_muon"].HeaderText = "Ngày Mượn";
+            data.Columns["ngay_tra"].HeaderText = "Ngày Trả";
+            data.Columns["so_tien_phat"].HeaderText = "Số Tiền Phạt";
+            data.Columns["trang_thai"].HeaderText = "Trạng Thái";
+         
+            //data.DataSource = MuonTraDAO.Instance.Xem();
         }
         public bool Sua(DataGridView data)
         {

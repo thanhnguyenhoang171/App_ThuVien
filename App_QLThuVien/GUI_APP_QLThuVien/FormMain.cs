@@ -23,6 +23,8 @@ namespace GUI_APP_QLThuVien
         private void FormMain_Load(object sender, EventArgs e)
         {
             SachBUS.Instance.Xem(dGVSach);
+       
+            
             TheThuVienBUS.Instance.Xem(dGVTheThuVien);
             MuonTraBUS.Instance.Xem(dGVMuonTra);
         }
@@ -76,7 +78,7 @@ namespace GUI_APP_QLThuVien
             }
             else
             {
-                MessageBox.Show("Sửa dữ liệu Sách thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sửa dữ liệu Sách thất bại! \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
       
             }
             SachBUS.Instance.Xem(dGVSach);
@@ -111,59 +113,68 @@ namespace GUI_APP_QLThuVien
 
             int namXB = dtpNamXB.Value.Year;
 
-            if (maSach.Length > 5)
+            if (string.IsNullOrWhiteSpace(txtMaSach.Text) || string.IsNullOrWhiteSpace(txtTenSach.Text) || string.IsNullOrWhiteSpace(txtTacGia.Text) || string.IsNullOrWhiteSpace(txtTheLoai.Text) || string.IsNullOrWhiteSpace(txtMoTa.Text) || string.IsNullOrWhiteSpace(txtSoLuong.Text) || string.IsNullOrWhiteSpace(txtGia.Text) || dtpNamXB.Value == null)
             {
-                MessageBox.Show("Mã Sách phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
-            if (tenSach.Length > 255)
-            {
-                MessageBox.Show("Tên Sách phải tối đa là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (theLoai.Length > 150)
-            {
-                MessageBox.Show("Thể Loại phải tối đa là 150 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (moTa.Length > 150)
-            {
-                MessageBox.Show("Mô Tả phải tối đa là 150 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (tacGia.Length > 100)
-            {
-                MessageBox.Show("Tác Giả phải tối da là 100 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!int.TryParse(txtSoLuong.Text, out soLuong) || soLuong < 0)
-            {
-                MessageBox.Show("Số Lượng Hiện có phải là số nguyên không âm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!decimal.TryParse(txtGia.Text, out giaSach) || giaSach < 0)
-            {
-                MessageBox.Show("Giá Sách phải số âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (namXB.ToString().Length > 4)
-            {
-                MessageBox.Show("Năm Xuất Bản không hợp lệ", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (SachBUS.Instance.Them(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB))
-            {
-                MessageBox.Show("Thêm Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SachBUS.Instance.Xem(dGVSach);
-                LamMoiTextbox();
+                MessageBox.Show("Vui lòng không được để trống", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Thêm Sách thất bại.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
+             
             
+                if (maSach.Length > 5)
+                {  
+                    MessageBox.Show("Mã Sách phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
+                }
+                if (tenSach.Length > 255)
+                {
+                    MessageBox.Show("Tên Sách phải tối đa là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (theLoai.Length > 150)
+                {
+                    MessageBox.Show("Thể Loại phải tối đa là 150 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (moTa.Length > 150)
+                {
+                    MessageBox.Show("Mô Tả phải tối đa là 150 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (tacGia.Length > 100)
+                {
+                    MessageBox.Show("Tác Giả phải tối da là 100 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (!int.TryParse(txtSoLuong.Text, out soLuong) || soLuong < 0)
+                {
+                    MessageBox.Show("Số Lượng Hiện có phải là số nguyên không âm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (!decimal.TryParse(txtGia.Text, out giaSach) || giaSach < 0)
+                {
+                    MessageBox.Show("Giá Sách phải số âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (namXB.ToString().Length > 4)
+                {
+                    MessageBox.Show("Năm Xuất Bản không hợp lệ", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (SachBUS.Instance.Them(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB))
+                {
+                    MessageBox.Show("Thêm Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    SachBUS.Instance.Xem(dGVSach);
+                    LamMoiTextbox();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm Sách thất bại. \nCó thể Mã Sách đã tồn tại \nVui lòng kiểm tra lại.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
         }
 
         private void txtTenSach_TextChanged(object sender, EventArgs e)
@@ -196,7 +207,7 @@ namespace GUI_APP_QLThuVien
             }
             else
             {
-                MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thất bại!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thất bại!. \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
           
             }
             TheThuVienBUS.Instance.Xem(dGVTheThuVien);
@@ -212,50 +223,57 @@ namespace GUI_APP_QLThuVien
             DateTime ngayDK = dtpNgayDK.Value; 
             DateTime ngayHH = dtpNgayHH.Value;
 
-            // Kiểm tra dữ liệu
-            if (maThe.Length > 5)
+            if (string.IsNullOrWhiteSpace(txtMaThe.Text) || string.IsNullOrWhiteSpace(txtHoTen.Text) || string.IsNullOrWhiteSpace(txtDiaChi.Text) || string.IsNullOrWhiteSpace(txtDienThoai.Text) || string.IsNullOrWhiteSpace(txtEmail.Text) || dtpNgayDK.Value == null || dtpNgayDK.Value == DateTime.MinValue || dtpNgayHH.Value == null || dtpNgayHH.Value == DateTime.MinValue)
             {
-                MessageBox.Show("Mã Thẻ phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
-            if (hoTen.Length > 100)
-            {
-                MessageBox.Show("Họ Tên phải tối đa là 100 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (diaChi.Length > 255)
-            {
-                MessageBox.Show("Địa Chỉ phải tối đa là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (dienThoai.Length != 10)
-            {
-                MessageBox.Show("Số điện không hợp lệ", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (email.Length > 255)
-            {
-                MessageBox.Show("email phải tối da là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (ngayDK > ngayHH)
-            {
-                MessageBox.Show("Ngày Đăng Ký đang lớn hơn Ngày Hết Hạn", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (TheThuVienBUS.Instance.Them(maThe, hoTen, diaChi, dienThoai, email, ngayDK, ngayHH))
-            {
-                MessageBox.Show("Thêm Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
-                TheThuVienBUS.Instance.Xem(dGVTheThuVien);
-                LamMoiTextbox();
+                MessageBox.Show("Vui lòng không được để trống", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Thêm Thẻ Thư Viện thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             
+                // Kiểm tra dữ liệu
+                if (maThe.Length > 5)
+                {
+                    MessageBox.Show("Mã Thẻ phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
+                }
+                if (hoTen.Length > 100)
+                {
+                    MessageBox.Show("Họ Tên phải tối đa là 100 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (diaChi.Length > 255)
+                {
+                    MessageBox.Show("Địa Chỉ phải tối đa là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (dienThoai.Length != 10)
+                {
+                    MessageBox.Show("Số Điện Thoại không hợp lệ", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (email.Length > 255)
+                {
+                    MessageBox.Show("Email phải tối da là 255 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (ngayDK > ngayHH)
+                {
+                    MessageBox.Show("Ngày Đăng Ký đang lớn hơn Ngày Hết Hạn", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (TheThuVienBUS.Instance.Them(maThe, hoTen, diaChi, dienThoai, email, ngayDK, ngayHH))
+                {
+                    MessageBox.Show("Thêm Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    TheThuVienBUS.Instance.Xem(dGVTheThuVien);
+                    LamMoiTextbox();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm Thẻ Thư Viện thất bại!. \n Có thể Mã Thẻ đã tồn tại. Vui lòng kiểm tra lại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
             }
 
         }
@@ -296,45 +314,52 @@ namespace GUI_APP_QLThuVien
             DateTime ngayTra = dtpNgayTra.Value;
             string trangThai = cbxTrangThai.Text;
             decimal tienPhat;
-            // Kiểm tra dữ liệu
-            if (maGiaoDich.Length > 5)
+            if (string.IsNullOrWhiteSpace(txtMaGD.Text) || string.IsNullOrWhiteSpace(txtMaSachMT.Text) || string.IsNullOrWhiteSpace(txtMaTheMT.Text) || string.IsNullOrWhiteSpace(cbxTrangThai.Text) || string.IsNullOrWhiteSpace(txtTienPhat.Text) || dtpNgayMuon.Value == null || dtpNgayMuon.Value == DateTime.MinValue || dtpNgayTra.Value == null || dtpNgayTra.Value == DateTime.MinValue)
             {
-                MessageBox.Show("Giao Dịch phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-
-            }
-            if (maSach.Length > 5)
-            {
-                MessageBox.Show("Mã Sách phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (maThe.Length > 5)
-            {
-                MessageBox.Show("Mã Thẻ phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (ngayMuon > ngayTra)
-            {
-                MessageBox.Show("Ngày Mượn đang lớn hơn Ngày Trả", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
- 
-            if (!decimal.TryParse(txtTienPhat.Text, out tienPhat) || tienPhat < 0)
-            {
-                MessageBox.Show("Số Tiền Phạt phải là số không âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            
-            if (MuonTraBUS.Instance.Them(maGiaoDich, maSach, maThe, ngayMuon,ngayTra, tienPhat, trangThai))
-            {
-                MessageBox.Show("Thêm Mượn Trả thành công!","Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                MuonTraBUS.Instance.Xem(dGVMuonTra);
-                SachBUS.Instance.Xem(dGVSach);
-                LamMoiTextbox();
+                MessageBox.Show("Vui lòng không được để trống", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("Số Lượng hiện có cho sách này đã hết không thể mượn", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Kiểm tra dữ liệu
+                if (maGiaoDich.Length > 5)
+                {
+                    MessageBox.Show("Giao Dịch phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
+                }
+                if (maSach.Length > 5)
+                {
+                    MessageBox.Show("Mã Sách phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (maThe.Length > 5)
+                {
+                    MessageBox.Show("Mã Thẻ phải tối đa là 5 ký tự.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (ngayMuon > ngayTra)
+                {
+                    MessageBox.Show("Ngày Mượn đang lớn hơn Ngày Trả", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!decimal.TryParse(txtTienPhat.Text, out tienPhat) || tienPhat < 0)
+                {
+                    MessageBox.Show("Số Tiền Phạt phải là số không âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MuonTraBUS.Instance.Them(maGiaoDich, maSach, maThe, ngayMuon, ngayTra, tienPhat, trangThai))
+                {
+                    MessageBox.Show("Thêm Mượn Trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MuonTraBUS.Instance.Xem(dGVMuonTra);
+                    SachBUS.Instance.Xem(dGVSach);
+                    LamMoiTextbox();
+                }
+                else
+                {
+                    MessageBox.Show("Có thể Mã Giao Dịch đã tồn tại\nHoặc Mã Thẻ, Mã Sách không tồn tại \nHoặc do Số Lượng hiện có cho sách này đã hết không thể mượn.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

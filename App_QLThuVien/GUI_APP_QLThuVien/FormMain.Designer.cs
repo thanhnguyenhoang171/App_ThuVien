@@ -103,8 +103,8 @@
             this.lblMaSachMT = new System.Windows.Forms.Label();
             this.lblMaGD = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.about = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.about = new System.Windows.Forms.Label();
             this.panelSach.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSach)).BeginInit();
             this.panel1.SuspendLayout();
@@ -184,7 +184,7 @@
             this.dGVSach.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dGVSach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -941,16 +941,6 @@
             this.panel3.Size = new System.Drawing.Size(2060, 32);
             this.panel3.TabIndex = 24;
             // 
-            // about
-            // 
-            this.about.AutoSize = true;
-            this.about.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.about.Location = new System.Drawing.Point(14, 9);
-            this.about.Name = "about";
-            this.about.Size = new System.Drawing.Size(262, 15);
-            this.about.TabIndex = 0;
-            this.about.Text = "Designed & Programmed by Mkhue and HThanh";
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -962,6 +952,16 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Visit Our GitHub";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // about
+            // 
+            this.about.AutoSize = true;
+            this.about.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.about.Location = new System.Drawing.Point(14, 9);
+            this.about.Name = "about";
+            this.about.Size = new System.Drawing.Size(264, 15);
+            this.about.TabIndex = 0;
+            this.about.Text = "Designed & Programmed by MKhue and HThanh";
             // 
             // FormMain
             // 
