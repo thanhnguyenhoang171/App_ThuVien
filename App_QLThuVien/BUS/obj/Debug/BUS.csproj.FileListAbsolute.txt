@@ -1,0 +1,48 @@
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\BUS.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\BUS.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\BUS.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DAO.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DTO.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DAO.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DAO.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DTO.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\bin\Debug\DTO.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.Properties.Resources.resources
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.csproj.GenerateResource.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.csproj.Up2Date
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\University\App_QLThuVien\BUS\obj\Debug\BUS.pdb
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.exe.config
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.exe
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.pdb
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.exe
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.exe
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.pdb
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.exe.config
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.pdb
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.exe.config
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.Properties.Resources.resources
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.GenerateResource.cache
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.CopyComplete
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.exe
+D:\StudyData\HeQuanTriCSDL\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\BUS.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DAO.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.pdb
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\bin\Debug\DTO.exe.config
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.Properties.Resources.resources
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.GenerateResource.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.csproj.Up2Date
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.exe
+D:\Chanh Resources\Năm 3 - HK 2\Quản Trị Cơ Sở Dữ Liệu\BT_QTCSDL_App_ThuVien\App_QLThuVien\BUS\obj\Debug\BUS.pdb
