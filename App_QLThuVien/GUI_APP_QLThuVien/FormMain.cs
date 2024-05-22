@@ -29,8 +29,6 @@ namespace GUI_APP_QLThuVien
             MuonTraBUS.Instance.Xem(dGVMuonTra);
         }
 
-        // Hàm kiểm tra dữ liệu đầu vào hợp lệ cho sách
-
         private void LamMoiTextbox ()
         {
             txtMaSach.Clear();
@@ -58,10 +56,7 @@ namespace GUI_APP_QLThuVien
 
         }
 
-        private void btnXemSach_Click(object sender, EventArgs e)
-        {
-            //SachBUS.Instance.Xem(dgvSach);
-        }
+     
 
         private void lblTittle_Click(object sender, EventArgs e)
         {
