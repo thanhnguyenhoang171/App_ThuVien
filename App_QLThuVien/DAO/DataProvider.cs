@@ -28,12 +28,15 @@ namespace DAO
         public DataProvider() { }
 
         // Connection String của mnkhue
-        // string connectionString = @"Data Source=LAPTOP-3RR4R1FA\SQLEXPRESS; Initial Catalog = QuanLyThuVien; Integrated Security = True";
+        string connectionString = @"Data Source=LAPTOP-3RR4R1FA\SQLEXPRESS; Initial Catalog = QuanLyThuVien; Integrated Security = True";
 
         // Connection String của hthanh
-        private string connectionString = @"Data Source=LAS_Chanh\LASCHANH; Initial Catalog = QuanLyThuVien; Integrated Security = True";
+        //private string connectionString = @"Data Source=LAS_Chanh\LASCHANH; Initial Catalog = QuanLyThuVien; Integrated Security = True";
         // Trả data theo yêu cầu query
 
+        // Thêm kết nối tới cơ sở dữ liệu của bạn tại đây
+
+        ///
         public DataTable ExecuteQuery (string query, object[] parameters = null)
         {
             DataTable dataTable = new DataTable();
