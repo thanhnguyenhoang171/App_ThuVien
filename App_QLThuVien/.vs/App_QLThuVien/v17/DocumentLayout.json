@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|solutionrelative:gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|solutionrelative:gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\bus\\thethuvienbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|solutionrelative:bus\\thethuvienbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\bus\\muontrabus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|solutionrelative:bus\\muontrabus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2AD5BFD-4F40-414C-8B76-276FCA6EFCA5}|DAO\\DAO.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\dao\\dataprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2AD5BFD-4F40-414C-8B76-276FCA6EFCA5}|DAO\\DAO.csproj|solutionrelative:dao\\dataprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\bus\\sachbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,11 +38,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "MuonTraBUS.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\MuonTraBUS.cs",
+              "RelativeDocumentMoniker": "BUS\\MuonTraBUS.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\MuonTraBUS.cs",
+              "RelativeToolTip": "BUS\\MuonTraBUS.cs",
+              "ViewState": "AQIAAEwAAAAAAAAAAIAwwFkAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T16:03:04.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TheThuVienBUS.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\TheThuVienBUS.cs",
+              "RelativeDocumentMoniker": "BUS\\TheThuVienBUS.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\TheThuVienBUS.cs",
+              "RelativeToolTip": "BUS\\TheThuVienBUS.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAQwEcAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T15:58:17.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DataProvider.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\DAO\\DataProvider.cs",
+              "RelativeDocumentMoniker": "DAO\\DataProvider.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\DAO\\DataProvider.cs",
+              "RelativeToolTip": "DAO\\DataProvider.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAuwCEAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T11:10:21.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "SachDAO.cs",
               "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\DAO\\SachDAO.cs",
               "RelativeDocumentMoniker": "DAO\\SachDAO.cs",
@@ -38,19 +89,21 @@
               "RelativeToolTip": "DAO\\SachDAO.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAIwDUAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T09:04:55.187Z"
+              "WhenOpened": "2024-05-22T09:04:55.187Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "SachBUS.cs",
               "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\SachBUS.cs",
               "RelativeDocumentMoniker": "BUS\\SachBUS.cs",
               "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\SachBUS.cs",
               "RelativeToolTip": "BUS\\SachBUS.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAYwDAAAAAJAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAgwFkAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T09:04:19.403Z"
+              "WhenOpened": "2024-05-22T09:04:19.403Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +125,7 @@
               "RelativeDocumentMoniker": "GUI_APP_QLThuVien\\FormMain.cs",
               "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
               "RelativeToolTip": "GUI_APP_QLThuVien\\FormMain.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAQwB0AAAAJAAAA",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAiwFMAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-21T07:37:51.445Z",
               "EditorCaption": ""

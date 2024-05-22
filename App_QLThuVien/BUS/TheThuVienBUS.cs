@@ -62,13 +62,17 @@ namespace BUS
         public bool Sua(DataGridView data)
         {
             DataGridViewRow row = data.SelectedCells[0].OwningRow;
-            string maThe = row.Cells["MaThe"].Value.ToString();
-            string hoTen = row.Cells["HoTen"].Value.ToString();
-            string diaChi = row.Cells["DiaChi"].Value.ToString();
-            string dienThoai = row.Cells["DienThoai"].Value.ToString();
-            string email = row.Cells["Email"].Value.ToString();
-            DateTime ngayDK = Convert.ToDateTime(row.Cells["NgayDK"].Value);
-            DateTime ngayHH = Convert.ToDateTime(row.Cells["NgayHH"].Value);
+
+
+
+
+            string maThe = row.Cells[0].Value.ToString();
+            string hoTen = row.Cells[1].Value.ToString();
+            string diaChi = row.Cells[2].Value.ToString();
+            string dienThoai = row.Cells[3].Value.ToString();
+            string email = row.Cells[4].Value.ToString();
+            DateTime ngayDK = Convert.ToDateTime(row.Cells[5].Value);
+            DateTime ngayHH = Convert.ToDateTime(row.Cells[6].Value);
             TheThuVien theThuVien = new TheThuVien (maThe, hoTen, diaChi, dienThoai, email, ngayDK, ngayHH);
             return TheThuVienDAO.Instance.Sua(maThe, theThuVien);
         }
@@ -82,7 +86,7 @@ namespace BUS
             if (data.SelectedCells.Count > 0)
             {
                 DataGridViewRow row = data.SelectedCells[0].OwningRow;
-                string maThe = row.Cells["MaThe"].Value.ToString();
+                string maThe = row.Cells[0].Value.ToString();
 
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá Thẻ Thư Viện này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -97,5 +101,7 @@ namespace BUS
             }
             return false;
         }
+
+
     }
 }

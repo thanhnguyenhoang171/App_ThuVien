@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -65,18 +66,29 @@ namespace GUI_APP_QLThuVien
 
         private void btnSuaSach_Click(object sender, EventArgs e)
         {
-            if (SachBUS.Instance.Sua(dGVSach))
+            if (dataChanged==true)
             {
-                MessageBox.Show("Sửa dữ liệu Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (SachBUS.Instance.Sua(dGVSach))
+                {
+                    MessageBox.Show("Sửa dữ liệu Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                
                      
+                }
+                else
+                {
+                    MessageBox.Show("Sửa dữ liệu Sách thất bại! \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      
+                }
+                SachBUS.Instance.Xem(dGVSach);
+                    // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
+                    dataChanged = false;
+
             }
             else
             {
-                MessageBox.Show("Sửa dữ liệu Sách thất bại! \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-      
+                // Hiển thị thông báo nếu không có thay đổi dữ liệu
+                MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            SachBUS.Instance.Xem(dGVSach);
         }
 
         private void btnXoaSach_Click(object sender, EventArgs e)
@@ -166,7 +178,7 @@ namespace GUI_APP_QLThuVien
                 }
                 else
                 {
-                    MessageBox.Show("Thêm Sách thất bại. \nCó thể Mã Sách đã tồn tại \nVui lòng kiểm tra lại.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm Sách thất bại. Vui lòng kiểm tra: \n-Có thể Mã Sách đã tồn tại", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -191,21 +203,31 @@ namespace GUI_APP_QLThuVien
         {
 
         }
-
+        private bool dataChanged = false;
         private void btnSuaTheThuVien_Click(object sender, EventArgs e)
         {
-            if (TheThuVienBUS.Instance.Sua(dGVTheThuVien))
+            // Kiểm tra xem có thay đổi dữ liệu không trước khi thực hiện hành động sửa
+            if (dataChanged)
             {
-                MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-              
+                if (TheThuVienBUS.Instance.Sua(dGVTheThuVien))
+                {
+                    MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thất bại!. \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                TheThuVienBUS.Instance.Xem(dGVTheThuVien);
 
+                // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
+                dataChanged = false;
             }
             else
             {
-                MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thất bại!. \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          
+                // Hiển thị thông báo nếu không có thay đổi dữ liệu
+                MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            TheThuVienBUS.Instance.Xem(dGVTheThuVien);
+
         }
 
         private void btnThemTheThuVien_Click(object sender, EventArgs e)
@@ -266,7 +288,7 @@ namespace GUI_APP_QLThuVien
                 }
                 else
                 {
-                    MessageBox.Show("Thêm Thẻ Thư Viện thất bại!. \n Có thể Mã Thẻ đã tồn tại. Vui lòng kiểm tra lại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Thêm Thẻ Thư Viện thất bại!. Vui lòng kiểm tra:\n- Có thể Mã Thẻ đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -315,6 +337,8 @@ namespace GUI_APP_QLThuVien
             }
             else
             {
+            
+
                 // Kiểm tra dữ liệu
                 if (maGiaoDich.Length > 5)
                 {
@@ -343,7 +367,7 @@ namespace GUI_APP_QLThuVien
                     MessageBox.Show("Số Tiền Phạt phải là số không âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+          
                 if (MuonTraBUS.Instance.Them(maGiaoDich, maSach, maThe, ngayMuon, ngayTra, tienPhat, trangThai))
                 {
                     MessageBox.Show("Thêm Mượn Trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -353,8 +377,10 @@ namespace GUI_APP_QLThuVien
                 }
                 else
                 {
-                    MessageBox.Show("Có thể Mã Giao Dịch đã tồn tại\nHoặc Mã Thẻ, Mã Sách không tồn tại \nHoặc do Số Lượng hiện có cho sách này đã hết không thể mượn.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Vui lòng kiểm tra: \n- Có thể Mã Giao Dịch đã tồn tại\n- Mã Thẻ, Mã Sách không tồn tại \n- Số Lượng hiện có cho sách này đã hết không thể mượn \n- Thẻ đã hết hạn", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                
+                
             }
         }
 
@@ -373,7 +399,9 @@ namespace GUI_APP_QLThuVien
 
         private void btnSuaMuonTra_Click(object sender, EventArgs e)
         {
-            if (MuonTraBUS.Instance.Sua(dGVMuonTra))
+            if (dataChanged)
+            {
+                if (MuonTraBUS.Instance.Sua(dGVMuonTra))
             {
                 MessageBox.Show("Sửa dữ liệu Mượn trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 SachBUS.Instance.Xem(dGVSach);
@@ -383,6 +411,15 @@ namespace GUI_APP_QLThuVien
                 MessageBox.Show("Không thể sửa đổi Mượn trả có thể do số lượng hiện có của sách đã hết hoặc bạn đã nhập sai dữ liệu sửa đổi", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             MuonTraBUS.Instance.Xem(dGVMuonTra);
+
+                // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
+                dataChanged = false;
+            }
+            else
+            {
+                // Hiển thị thông báo nếu không có thay đổi dữ liệu
+                MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void dGVMuonTra_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -398,6 +435,26 @@ namespace GUI_APP_QLThuVien
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/thanhnguyenhoang171/BT_QTCSDL_App_ThuVien");
+        }
+
+        private void dGVTheThuVien_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            dataChanged = true;
+        }
+
+        private void dGVMuonTra_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            dataChanged = true;
+        }
+
+        private void dGVSach_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            dataChanged = true;
+        }
+   
+        private void dGVTheThuVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
         }
     }
 }
