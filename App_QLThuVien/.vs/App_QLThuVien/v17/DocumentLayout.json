@@ -1,14 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\",
+  "WorkspaceRootPath": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|c:\\users\\thanh\\onedrive\\desktop\\app_qlthuvien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|solutionrelative:gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\bus\\sachbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F4C49B4E-CDA6-414A-B412-5A9A4FAE5737}|BUS\\BUS.csproj|solutionrelative:bus\\sachbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|solutionrelative:gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07B57274-2A4E-4D4F-86CB-F894B9E915AA}|GUI_APP_QLThuVien\\GUI_APP_QLThuVien.csproj|solutionrelative:gui_app_qlthuvien\\formmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E2AD5BFD-4F40-414C-8B76-276FCA6EFCA5}|DAO\\DAO.csproj|d:\\chanh resources\\n\u0103m 3 - hk 2\\qu\u1EA3n tr\u1ECB c\u01A1 s\u1EDF d\u1EEF li\u1EC7u\\bt_qtcsdl_app_thuvien\\app_qlthuvien\\dao\\sachdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2AD5BFD-4F40-414C-8B76-276FCA6EFCA5}|DAO\\DAO.csproj|solutionrelative:dao\\sachdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,15 +26,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "SachDAO.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\DAO\\SachDAO.cs",
+              "RelativeDocumentMoniker": "DAO\\SachDAO.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\DAO\\SachDAO.cs",
+              "RelativeToolTip": "DAO\\SachDAO.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAIwDUAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T09:04:55.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SachBUS.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\SachBUS.cs",
+              "RelativeDocumentMoniker": "BUS\\SachBUS.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\BUS\\SachBUS.cs",
+              "RelativeToolTip": "BUS\\SachBUS.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAYwDAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T09:04:19.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FormMain.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
               "RelativeDocumentMoniker": "GUI_APP_QLThuVien\\FormMain.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs [Design]",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs [Design]",
               "RelativeToolTip": "GUI_APP_QLThuVien\\FormMain.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-21T14:57:42.88Z",
@@ -34,15 +68,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "FormMain.cs",
-              "DocumentMoniker": "C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
+              "DocumentMoniker": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
               "RelativeDocumentMoniker": "GUI_APP_QLThuVien\\FormMain.cs",
-              "ToolTip": "C:\\Users\\thanh\\OneDrive\\Desktop\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
+              "ToolTip": "D:\\Chanh Resources\\N\u0103m 3 - HK 2\\Qu\u1EA3n Tr\u1ECB C\u01A1 S\u1EDF D\u1EEF Li\u1EC7u\\BT_QTCSDL_App_ThuVien\\App_QLThuVien\\GUI_APP_QLThuVien\\FormMain.cs",
               "RelativeToolTip": "GUI_APP_QLThuVien\\FormMain.cs",
-              "ViewState": "AQIAAG4BAAAAAAAAAAAtwH8BAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T07:37:51.445Z"
+              "WhenOpened": "2024-05-21T07:37:51.445Z",
+              "EditorCaption": ""
             }
           ]
         }
