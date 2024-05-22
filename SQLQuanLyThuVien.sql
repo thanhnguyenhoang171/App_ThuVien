@@ -250,3 +250,41 @@ BEGIN
     END
 END
 GO
+
+-- Tạo một trình kích hoạt để thực thi rằng ngày hết hạn của thẻ phải sau ngày hiện tại cho một giao dịch vay mới
+
+IF OBJECT_ID('trg_CheckExpirationDate') IS NOT NULL
+DROP TRIGGER trg_CheckExpirationDate;
+GO
+
+CREATE TRIGGER trg_CheckExpirationDate
+ON Muon_tra
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @ma_the VARCHAR(5), @ngay_muon DATE;
+
+    -- Get the ma_the and ngay_muon from the inserted row
+    SELECT @ma_the = i.ma_the, @ngay_muon = i.ngay_muon
+    FROM inserted i;
+
+    -- Check if the card is expired
+    IF EXISTS (
+        SELECT 1
+        FROM The_thu_vien
+        WHERE ma_the = @ma_the AND ngay_het_han < CONVERT(DATE, GETDATE())
+    )
+    BEGIN
+        -- If the card is expired, raise an error and rollback the transaction
+        RAISERROR ('Thẻ thư viện đã hết hạn, không thể mượn sách.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+    ELSE
+    BEGIN
+        -- If the card is not expired, insert the row into Muon_tra
+        INSERT INTO Muon_tra (ma_giao_dich, ma_sach, ma_the, ngay_muon, ngay_tra, so_tien_phat, trang_thai)
+        SELECT ma_giao_dich, ma_sach, ma_the, ngay_muon, ngay_tra, so_tien_phat, trang_thai
+        FROM inserted;
+    END
+END
+GO
