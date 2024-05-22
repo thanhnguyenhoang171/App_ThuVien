@@ -67,13 +67,13 @@ namespace BUS
         {
             DataGridViewRow row = data.SelectedCells[0].OwningRow;
 
-            string maGiaoDich = row.Cells["MaGiaoDich"].Value.ToString();
-            string maSach = row.Cells["MaSach"].Value.ToString();
-            string maThe = row.Cells["MaThe"].Value.ToString();
-            DateTime ngayMuon = Convert.ToDateTime(row.Cells["NgayMuon"].Value);
-            DateTime ngayTra = Convert.ToDateTime(row.Cells["NgayTra"].Value);
-            decimal tienPhat = Convert.ToDecimal(row.Cells["SoTienPhat"].Value);
-            string trangThai = row.Cells["TrangThai"].Value.ToString();
+            string maGiaoDich = row.Cells[0].Value.ToString();
+            string maSach = row.Cells[1].Value.ToString();
+            string maThe = row.Cells[2].Value.ToString();
+            DateTime ngayMuon = Convert.ToDateTime(row.Cells[3].Value);
+            DateTime ngayTra = Convert.ToDateTime(row.Cells[4].Value);
+            decimal tienPhat = Convert.ToDecimal(row.Cells[5].Value);
+            string trangThai = row.Cells[6].Value.ToString();
 
             MuonTra muonTra = new MuonTra(maGiaoDich, maSach, maThe, ngayMuon, ngayTra, tienPhat, trangThai);
             return MuonTraDAO.Instance.Sua(maGiaoDich, muonTra);
@@ -88,7 +88,7 @@ namespace BUS
             if (data.SelectedCells.Count > 0)
             {
                 DataGridViewRow row = data.SelectedCells[0].OwningRow;
-                string maGiaoDich = row.Cells["MaGiaoDich"].Value.ToString();
+                string maGiaoDich = row.Cells[0].Value.ToString();
 
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá giao dịch mượn trả này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

@@ -69,14 +69,14 @@ namespace BUS
         {
             DataGridViewRow row = data.SelectedCells[0].OwningRow;
             
-            string maSach = row.Cells["MaSach"].Value.ToString();
-            string tenSach = row.Cells["TenSach"].Value.ToString();
-            string tacGia = row.Cells["TenTacGia"].Value.ToString();
-            string theLoai = row.Cells["TheLoai"].Value.ToString();
-            int soLuong = Convert.ToInt32(row.Cells["SoLuong"].Value);
-            string moTa = row.Cells["MoTa"].Value.ToString();
-            decimal giaSach = Convert.ToDecimal(row.Cells["GiaSach"].Value); 
-            int namXB = Convert.ToInt32(row.Cells["NamXB"].Value);
+            string maSach = row.Cells[0].Value.ToString();
+            string tenSach = row.Cells[1].Value.ToString();
+            string tacGia = row.Cells[2].Value.ToString();
+            string theLoai = row.Cells[3].Value.ToString();
+            int soLuong = Convert.ToInt32(row.Cells[4].Value);
+            string moTa = row.Cells[5].Value.ToString();
+            decimal giaSach = Convert.ToDecimal(row.Cells[6].Value); 
+            int namXB = Convert.ToInt32(row.Cells[7].Value);
 
             Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
             return SachDAO.Instance.Sua(maSach, sach);
@@ -87,7 +87,7 @@ namespace BUS
             if (data.SelectedCells.Count > 0)
             {
                 DataGridViewRow row = data.SelectedCells[0].OwningRow;
-                string maSach = row.Cells["MaSach"].Value.ToString();
+                string maSach = row.Cells[0].Value.ToString();
 
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá Sách này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
