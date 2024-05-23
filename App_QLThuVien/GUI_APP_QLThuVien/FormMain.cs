@@ -24,8 +24,6 @@ namespace GUI_APP_QLThuVien
         private void FormMain_Load(object sender, EventArgs e)
         {
             SachBUS.Instance.Xem(dGVSach);
-       
-            
             TheThuVienBUS.Instance.Xem(dGVTheThuVien);
             MuonTraBUS.Instance.Xem(dGVMuonTra);
         }
@@ -48,8 +46,8 @@ namespace GUI_APP_QLThuVien
             txtMaThe.Clear();
             txtMaTheMT.Clear();
             txtTienPhat.Clear();
-      
-            
+            cbxTrangThai.SelectedIndex = -1;
+
         }
 
         private void dgvSach_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -63,16 +61,87 @@ namespace GUI_APP_QLThuVien
         {
 
         }
+        private bool KTra_ThayDoiDLSach()
+        {
+            if (dGVSach.CurrentRow == null)
+            {
+                return false;
+            }
 
+            DataGridViewRow row = dGVSach.CurrentRow;
+
+            if (txtMaSach.Text != row.Cells[0].Value.ToString()) return true;
+            if (txtTenSach.Text != row.Cells[1].Value.ToString()) return true;
+            if (txtTacGia.Text != row.Cells[3].Value.ToString()) return true;
+            if (txtTheLoai.Text != row.Cells[4].Value.ToString()) return true;
+
+            if (int.TryParse(txtSoLuong.Text, out int currentSoLuong))
+            {
+                if (currentSoLuong != Convert.ToInt32(row.Cells[6].Value)) return true;
+            }
+            else
+            {
+                // Nếu không thể parse txtTienPhat, coi như dữ liệu đã thay đổi
+                return true;
+            }
+            if (txtMoTa.Text != row.Cells[5].Value.ToString()) return true;
+            if (int.TryParse(txtGia.Text, out int currentGia))
+            {
+                if (currentGia != Convert.ToInt32(row.Cells[7].Value)) return true;
+            }
+            else
+            {
+                // Nếu không thể parse txtTienPhat, coi như dữ liệu đã thay đổi
+                return true;
+            }
+
+            if (dtpNamXB.Value != new DateTime(Convert.ToInt32(row.Cells[7].Value), 1, 1)) return true;
+    
+            
+
+            // Nếu tất cả đều không thay đổi, trả về false
+            return false;
+        }
         private void btnSuaSach_Click(object sender, EventArgs e)
         {
-            if (dataChanged==true)
+
+            if (string.IsNullOrWhiteSpace(txtMaSach.Text) &&
+         string.IsNullOrWhiteSpace(txtTenSach.Text) &&
+         string.IsNullOrWhiteSpace(txtTacGia.Text) &&
+         string.IsNullOrWhiteSpace(txtTheLoai.Text) &&
+         string.IsNullOrWhiteSpace(txtSoLuong.Text)
+         &&
+         string.IsNullOrWhiteSpace(txtMoTa.Text)
+         &&
+         string.IsNullOrWhiteSpace(txtGia.Text))
             {
-                    if (SachBUS.Instance.Sua(dGVSach))
+                MessageBox.Show("Vui lòng chọn một hàng để sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (KTra_ThayDoiDLSach())
+            {
+                DataGridViewRow row = dGVSach.CurrentRow;
+                // Cập nhật lại hàng trong DataGridView
+                row.Cells[0].Value = txtMaSach.Text;
+                row.Cells[1].Value = txtTenSach.Text;
+                row.Cells[2].Value = txtTacGia.Text;
+                row.Cells[3].Value = txtTheLoai.Text;
+                row.Cells[4].Value = txtMoTa.Text;
+                row.Cells[5].Value = Convert.ToInt32(txtSoLuong.Text);
+                row.Cells[6].Value = decimal.TryParse(txtGia.Text, out decimal giaSach) ? giaSach : 0;
+              
+                row.Cells[7].Value = Convert.ToInt32(dtpNamXB.Value.Year);
+
+
+
+
+                if (SachBUS.Instance.Sua(dGVSach))
                 {
                     MessageBox.Show("Sửa dữ liệu Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               
-                     
+                    LamMoiTextbox();
+                    txtMaSach.ReadOnly = false;
+
                 }
                 else
                 {
@@ -80,8 +149,7 @@ namespace GUI_APP_QLThuVien
       
                 }
                 SachBUS.Instance.Xem(dGVSach);
-                    // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
-                    dataChanged = false;
+                  
 
             }
             else
@@ -170,7 +238,7 @@ namespace GUI_APP_QLThuVien
                     MessageBox.Show("Năm Xuất Bản không hợp lệ", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (SachBUS.Instance.Them(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB))
+                if (SachBUS.Instance.Them(maSach, tenSach, tacGia, theLoai, moTa, soLuong, giaSach, namXB))
                 {
                     MessageBox.Show("Thêm Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     SachBUS.Instance.Xem(dGVSach);
@@ -203,15 +271,60 @@ namespace GUI_APP_QLThuVien
         {
 
         }
-        private bool dataChanged = false;
+   
+        private bool KTra_ThayDoiDLTheThuVien()
+        {
+            if (dGVTheThuVien.CurrentRow == null)
+            {
+                return false;
+            }
+
+            DataGridViewRow row = dGVTheThuVien.CurrentRow;
+
+            if (txtMaThe.Text != row.Cells[0].Value.ToString()) return true;
+            if (txtHoTen.Text != row.Cells[1].Value.ToString()) return true;
+            if (txtDiaChi.Text != row.Cells[2].Value.ToString()) return true;
+            if (txtDienThoai.Text != row.Cells[3].Value.ToString()) return true;
+            if (txtEmail.Text != row.Cells[4].Value.ToString()) return true;
+            if (dtpNgayDK.Value != Convert.ToDateTime(row.Cells[5].Value)) return true;
+            if (dtpNgayHH.Value != Convert.ToDateTime(row.Cells[6].Value)) return true;
+            return false;
+        }
+       
         private void btnSuaTheThuVien_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem có thay đổi dữ liệu không trước khi thực hiện hành động sửa
-            if (dataChanged)
+            
+            if (string.IsNullOrWhiteSpace(txtMaThe.Text) &&
+                string.IsNullOrWhiteSpace(txtHoTen.Text) &&
+                string.IsNullOrWhiteSpace(txtDiaChi.Text) &&
+                string.IsNullOrWhiteSpace(txtDienThoai.Text) &&
+                string.IsNullOrWhiteSpace(txtEmail.Text))
             {
+                MessageBox.Show("Vui lòng chọn một hàng để sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+           
+            if (KTra_ThayDoiDLTheThuVien())
+            {
+                DataGridViewRow row = dGVTheThuVien.CurrentRow;
+
+             
+                row.Cells[0].Value = txtMaThe.Text;
+                row.Cells[1].Value = txtHoTen.Text;
+                row.Cells[2].Value = txtDiaChi.Text;
+                row.Cells[3].Value = txtDienThoai.Text;
+                row.Cells[4].Value = txtEmail.Text;
+                row.Cells[5].Value = Convert.ToDateTime(dtpNgayDK.Value);
+                row.Cells[6].Value = Convert.ToDateTime(dtpNgayHH.Value);
+               
+
                 if (TheThuVienBUS.Instance.Sua(dGVTheThuVien))
                 {
                     MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    
+                    LamMoiTextbox();
+                    txtMaThe.ReadOnly = false;
                 }
                 else
                 {
@@ -219,8 +332,6 @@ namespace GUI_APP_QLThuVien
                 }
                 TheThuVienBUS.Instance.Xem(dGVTheThuVien);
 
-                // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
-                dataChanged = false;
             }
             else
             {
@@ -323,6 +434,7 @@ namespace GUI_APP_QLThuVien
 
         private void btnThemMuonTra_Click(object sender, EventArgs e)
         {
+       
             string maGiaoDich = txtMaGD.Text;
             string maSach = txtMaSachMT.Text;
             string maThe = txtMaTheMT.Text;
@@ -396,35 +508,88 @@ namespace GUI_APP_QLThuVien
 
             }
         }
+        private bool KTra_ThayDoiDLMuonTra()
+        {
+            if (dGVMuonTra.CurrentRow == null)
+            {
+                return false;
+            }
 
+            DataGridViewRow row = dGVMuonTra.CurrentRow;
+
+            if (txtMaGD.Text != row.Cells[0].Value.ToString()) return true;
+            if (txtMaSachMT.Text != row.Cells[1].Value.ToString()) return true;
+            if (txtMaTheMT.Text != row.Cells[2].Value.ToString()) return true;
+            if (dtpNgayMuon.Value != Convert.ToDateTime(row.Cells[3].Value)) return true;
+            if (dtpNgayTra.Value != Convert.ToDateTime(row.Cells[4].Value)) return true;
+            if (cbxTrangThai.Text != row.Cells[6].Value.ToString()) return true;
+            if (decimal.TryParse(txtTienPhat.Text, out decimal currentTienPhat))
+            {
+                if (currentTienPhat != Convert.ToDecimal(row.Cells[5].Value)) return true;
+            }
+            else
+            {
+                // Nếu không thể parse txtTienPhat, coi như dữ liệu đã thay đổi
+                return true;
+            }
+
+            // Nếu tất cả đều không thay đổi, trả về false
+            return false;
+        }
         private void btnSuaMuonTra_Click(object sender, EventArgs e)
         {
-            if (dataChanged)
+            if (string.IsNullOrWhiteSpace(txtMaGD.Text) &&
+         string.IsNullOrWhiteSpace(txtMaSachMT.Text) &&
+         string.IsNullOrWhiteSpace(txtMaTheMT.Text) &&
+         string.IsNullOrWhiteSpace(cbxTrangThai.Text) &&
+         string.IsNullOrWhiteSpace(txtTienPhat.Text))
             {
-                if (MuonTraBUS.Instance.Sua(dGVMuonTra))
-            {
-                MessageBox.Show("Sửa dữ liệu Mượn trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                SachBUS.Instance.Xem(dGVSach);
+                MessageBox.Show("Vui lòng chọn một hàng để sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
-            {
-                MessageBox.Show("Không thể sửa đổi Mượn trả có thể do số lượng hiện có của sách đã hết hoặc bạn đã nhập sai dữ liệu sửa đổi", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            MuonTraBUS.Instance.Xem(dGVMuonTra);
+           
 
-                // Đặt lại cờ thành false sau khi đã thực hiện hành động sửa
-                dataChanged = false;
-            }
-            else
-            {
-                // Hiển thị thông báo nếu không có thay đổi dữ liệu
-                MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                if (KTra_ThayDoiDLMuonTra())
+                {
+                    DataGridViewRow row = dGVMuonTra.CurrentRow;
+
+                    // Cập nhật lại hàng trong DataGridView
+                    row.Cells[0].Value = txtMaGD.Text;
+                    row.Cells[1].Value = txtMaSachMT.Text;
+                    row.Cells[2].Value = txtMaTheMT.Text;
+                    row.Cells[3].Value = Convert.ToDateTime(dtpNgayMuon.Value);
+                    row.Cells[4].Value = Convert.ToDateTime(dtpNgayTra.Value);
+                    row.Cells[6].Value = cbxTrangThai.Text;
+                    row.Cells[5].Value = decimal.TryParse(txtTienPhat.Text, out decimal tienPhat) ? tienPhat : 0; // Chuyển đổi txtTienPhat.Text sang decimal
+
+                    // Gọi phương thức Sua để lưu thay đổi vào cơ sở dữ liệu (nếu cần)
+                    if (MuonTraBUS.Instance.Sua(dGVMuonTra))
+                    {
+                        MessageBox.Show("Sửa dữ liệu Mượn trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SachBUS.Instance.Xem(dGVSach);
+                        LamMoiTextbox();
+                         txtMaGD.ReadOnly = false;
+                }
+                    else
+                    {
+                        MessageBox.Show("Không thể sửa đổi Mượn trả có thể do số lượng hiện có của sách đã hết hoặc bạn đã nhập sai dữ liệu sửa đổi", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    // Làm mới DataGridView để hiển thị dữ liệu cập nhật
+                    MuonTraBUS.Instance.Xem(dGVMuonTra);
+
+                }
+                else
+                {
+                    // Hiển thị thông báo nếu không có thay đổi dữ liệu
+                    MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            
         }
 
         private void dGVMuonTra_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+       
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -439,22 +604,105 @@ namespace GUI_APP_QLThuVien
 
         private void dGVTheThuVien_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            dataChanged = true;
         }
 
         private void dGVMuonTra_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            dataChanged = true;
         }
 
         private void dGVSach_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            dataChanged = true;
         }
    
         private void dGVTheThuVien_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+            if (e.RowIndex >= 0)
+            {
+                txtMaThe.ReadOnly = true;
+                DataGridViewRow row = dGVTheThuVien.Rows[e.RowIndex];
+        
+                txtMaThe.Text = row.Cells[0].Value.ToString();
+                txtHoTen.Text = row.Cells[1].Value.ToString();
+                txtDiaChi.Text = row.Cells[2].Value.ToString();
+                txtDienThoai.Text = row.Cells[3].Value.ToString();
+                txtEmail.Text = row.Cells[4].Value.ToString();
+                dtpNgayHH.Value = Convert.ToDateTime(row.Cells[6].Value);
+                dtpNgayDK.Value = Convert.ToDateTime(row.Cells[5].Value);
+             
+            }
+        }
+
+        private void dGVMuonTra_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+               txtMaGD.ReadOnly = true;
+                DataGridViewRow row = dGVMuonTra.Rows[e.RowIndex];
+                // Lấy dữ liệu từ các ô trong hàng được chọn và đặt vào các TextBox và điều khiển khác
+                txtMaGD.Text = row.Cells[0].Value.ToString();
+                txtMaSachMT.Text = row.Cells[1].Value.ToString();
+                txtMaTheMT.Text = row.Cells[2].Value.ToString();
+                // Giả sử bạn lưu trữ ngày dưới dạng DateTime
+                dtpNgayMuon.Value = Convert.ToDateTime(row.Cells[3].Value);
+                dtpNgayTra.Value = Convert.ToDateTime(row.Cells[4].Value);
+                cbxTrangThai.Text = row.Cells[6].Value.ToString();
+                txtTienPhat.Text = row.Cells[5].Value.ToString();
+            }
+        }
+
+        private void dGVSach_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                txtMaSach.ReadOnly = true;
+                DataGridViewRow row = dGVSach.Rows[e.RowIndex];
+                // Lấy dữ liệu từ các ô trong hàng được chọn và đặt vào các TextBox và điều khiển khác
+                txtMaSach.Text = row.Cells[0].Value.ToString();
+                txtTenSach.Text = row.Cells[1].Value.ToString();
+                txtTacGia.Text = row.Cells[2].Value.ToString();
+                txtTheLoai.Text = row.Cells[3].Value.ToString();
+                txtMoTa.Text = row.Cells[4].Value.ToString();
+                txtSoLuong.Text = row.Cells[5].Value.ToString();
+                txtGia.Text = row.Cells[6].Value.ToString();
+
+                dtpNamXB.Value = new DateTime(Convert.ToInt32(row.Cells[7].Value), 1, 1);
+
+
+            }
+        }
+
+        private void btnResetTxtSach_Click(object sender, EventArgs e)
+        {
+            txtMaSach.Clear();
+            txtTenSach.Clear();
+            txtTenSach.Clear();
+            txtTheLoai.Clear();
+            txtMoTa.Clear();
+            txtSoLuong.Clear();
+            txtGia.Clear();
+            txtMaSach.ReadOnly = false;
+            
+        }
+
+        private void btnRestTxtTheThuVien_Click(object sender, EventArgs e)
+        {
+            txtMaThe.Clear();
+            txtHoTen.Clear();
+            txtDiaChi.Clear();
+            txtDienThoai.Clear();
+            txtEmail.Clear();
+            txtMaThe.ReadOnly = false;
+
+        }
+
+        private void btnResetTxtMuonTra_Click(object sender, EventArgs e)
+        {
+            txtMaGD.Clear();
+            txtMaSachMT.Clear();
+            txtMaTheMT.Clear();
+            txtTienPhat.Clear();
+            cbxTrangThai.SelectedIndex = -1;
+            txtMaGD.ReadOnly = false;
         }
     }
 }

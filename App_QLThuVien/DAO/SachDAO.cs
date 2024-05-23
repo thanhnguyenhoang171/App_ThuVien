@@ -37,13 +37,13 @@ namespace DAO
                 string tenSach = item["ten_sach"].ToString();
                 string tacGia = item["tac_gia"].ToString();
                 string theLoai = item["the_loai"].ToString();
-                int soLuong = (int)item["so_luong_hien_co"];
                 string moTa = item["mo_ta"].ToString();
+                int soLuong = (int)item["so_luong_hien_co"];
                 decimal giaSach = (decimal)item["gia"];
                 int namXB = (int)item["nam_xuat_ban"];
 
 
-                Sach newSach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
+                Sach newSach = new Sach(maSach, tenSach, tacGia, theLoai, moTa, soLuong, giaSach, namXB);
 
                 saches.Add(newSach);
             }
@@ -53,8 +53,8 @@ namespace DAO
 
   
         public bool Sua(string maSach, Sach sach) {
-            string query = " UPDATE Sach SET ten_sach = @TenSach , tac_gia = @TenTacGia , the_loai = @TheLoai , so_luong_hien_co = @SoLuong , mo_ta = @MoTa , gia = @GiaSach , nam_xuat_ban = @NamXB where ma_sach = @MaSachCu ";
-            object[] para = new object[] {sach.TenSach, sach.TenTacGia, sach.TheLoai, sach.SoLuong, sach.MoTa, sach.GiaSach,sach.NamXB, maSach};
+            string query = " UPDATE Sach SET ten_sach = @TenSach , tac_gia = @TenTacGia , the_loai = @TheLoai ,  mo_ta = @MoTa , so_luong_hien_co = @SoLuong , gia = @GiaSach , nam_xuat_ban = @NamXB where ma_sach = @MaSachCu ";
+            object[] para = new object[] {sach.TenSach, sach.TenTacGia, sach.TheLoai,  sach.MoTa, sach.SoLuong, sach.GiaSach,sach.NamXB, maSach};
             if (DataProvider.Instance.ExecuteNonQuery(query, para)>0) {
                 return true;    
             }

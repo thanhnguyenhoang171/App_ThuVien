@@ -31,14 +31,14 @@ namespace BUS
             dt.Columns.Add("ten_sach", typeof(string));
             dt.Columns.Add("tac_gia", typeof(string));
             dt.Columns.Add("the_loai", typeof(string));
-            dt.Columns.Add("so_luong_hien_co", typeof(int));
             dt.Columns.Add("mo_ta", typeof(string));
+            dt.Columns.Add("so_luong_hien_co", typeof(int));
             dt.Columns.Add("gia", typeof(decimal));
             dt.Columns.Add("nam_xuat_ban", typeof(int));
 
             foreach (var sach in saches)
             {
-                dt.Rows.Add(sach.MaSach, sach.TenSach, sach.TenTacGia, sach.TheLoai, sach.SoLuong, sach.MoTa, sach.GiaSach, sach.NamXB);
+                dt.Rows.Add(sach.MaSach, sach.TenSach, sach.TenTacGia, sach.TheLoai, sach.MoTa, sach.SoLuong, sach.GiaSach, sach.NamXB);
             }
 
             return dt;
@@ -56,8 +56,8 @@ namespace BUS
             data.Columns["ten_sach"].HeaderText = "Tên Sách";
             data.Columns["tac_gia"].HeaderText = "Tác Giả";
             data.Columns["the_loai"].HeaderText = "Thể Loại";
-            data.Columns["so_luong_hien_co"].HeaderText = "Số Lượng Hiện Có";
             data.Columns["mo_ta"].HeaderText = "Mô Tả";
+            data.Columns["so_luong_hien_co"].HeaderText = "Số Lượng Hiện Có";
             data.Columns["gia"].HeaderText = "Giá Sách";
             data.Columns["nam_xuat_ban"].HeaderText = "Năm Xuất Bản";
 
@@ -73,12 +73,12 @@ namespace BUS
             string tenSach = row.Cells[1].Value.ToString();
             string tacGia = row.Cells[2].Value.ToString();
             string theLoai = row.Cells[3].Value.ToString();
-            int soLuong = Convert.ToInt32(row.Cells[4].Value);
-            string moTa = row.Cells[5].Value.ToString();
+            string moTa = row.Cells[4].Value.ToString();
+            int soLuong = Convert.ToInt32(row.Cells[5].Value);
             decimal giaSach = Convert.ToDecimal(row.Cells[6].Value); 
             int namXB = Convert.ToInt32(row.Cells[7].Value);
 
-            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
+            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, moTa, soLuong, giaSach, namXB);
             return SachDAO.Instance.Sua(maSach, sach);
         }
 
@@ -103,9 +103,9 @@ namespace BUS
             }
             return false;
         }
-        public bool Them(string maSach, string tenSach, string tacGia, string theLoai, int soLuong, string moTa, decimal giaSach, int namXB)
+        public bool Them(string maSach, string tenSach, string tacGia, string theLoai, string moTa, int soLuong, decimal giaSach, int namXB)
         {
-            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, soLuong, moTa, giaSach, namXB);
+            Sach sach = new Sach(maSach, tenSach, tacGia, theLoai, moTa, soLuong, giaSach, namXB);
             return SachDAO.Instance.Them(sach);
         }
     }
