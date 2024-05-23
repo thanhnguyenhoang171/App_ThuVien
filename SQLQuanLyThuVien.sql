@@ -95,7 +95,7 @@ GO
 -- Truy vấn
 SELECT * FROM Sach;
 SELECT * FROM The_thu_vien;
-SELECT * FROM Muon_tra where trang_thai = N'Chưa trả';
+SELECT * FROM Muon_tra;
 
 GO
 
@@ -117,8 +117,8 @@ ADD CONSTRAINT UK_ma_giao_dich UNIQUE (ma_giao_dich);
 GO
 
 -- Ràng buộc xoá thẻ thư viện thì xoá mượn trả
-ALTER TABLE Muon_tra
-DROP CONSTRAINT IF EXISTS FK_ma_the;
+--ALTER TABLE Muon_tra
+--DROP CONSTRAINT IF EXISTS FK_ma_the;
 
 ALTER TABLE Muon_tra
 ADD CONSTRAINT FK_ma_the FOREIGN KEY (ma_the) REFERENCES The_thu_vien(ma_the) ON DELETE CASCADE;
@@ -126,10 +126,10 @@ ADD CONSTRAINT FK_ma_the FOREIGN KEY (ma_the) REFERENCES The_thu_vien(ma_the) ON
 GO
 
 -- Ràng buộc không cho xoá sách nếu có người đang mượn mà chưa trả (chỉ cho phép xoá khi các giao dịch mượn trả của sách đó là đã trả)
--- Xóa trigger nếu đã tồn tại trước đó
-IF OBJECT_ID('TR_Sach_Delete') IS NOT NULL
-    DROP TRIGGER TR_Sach_Delete;
-GO
+
+--IF OBJECT_ID('TR_Sach_Delete') IS NOT NULL
+--    DROP TRIGGER TR_Sach_Delete;
+--GO
 
 CREATE TRIGGER TR_Sach_Delete
 ON Sach
@@ -161,13 +161,10 @@ BEGIN
 END;
 GO
 
-
-select * from Muon_tra where ma_sach = 'S001';
-
 -- Tạo ràng buộc khi thêm mượn trả thì sách mượn ('Chưa trả) có số lượng hiện có -1 và ngược lại
-IF OBJECT_ID('trgAfterInsertMuonTra') IS NOT NULL
-    DROP TRIGGER trgAfterInsertMuonTra;
-GO
+--IF OBJECT_ID('trgAfterInsertMuonTra') IS NOT NULL
+--    DROP TRIGGER trgAfterInsertMuonTra;
+--GO
 
 CREATE TRIGGER trgAfterInsertMuonTra
 ON Muon_tra
@@ -208,9 +205,9 @@ END
 GO
 
 
--- Tạo ràng buộc nếu sửa trạng thái 'Chưa trả' thành 'Đã trả' thì số lượng hiện có + 1 và ngược lại
-IF OBJECT_ID('trgAfterUpdateMuonTra') IS NOT NULL
-    DROP TRIGGER trgAfterUpdateMuonTra;
+---- Tạo ràng buộc nếu sửa trạng thái 'Chưa trả' thành 'Đã trả' thì số lượng hiện có + 1 và ngược lại
+--IF OBJECT_ID('trgAfterUpdateMuonTra') IS NOT NULL
+--    DROP TRIGGER trgAfterUpdateMuonTra;
 GO
 
 CREATE TRIGGER trgAfterUpdateMuonTra
@@ -255,9 +252,9 @@ GO
 
 -- Tạo một trigger để thực thi rằng ngày hết hạn của thẻ phải sau ngày hiện tại cho một giao dịch vay mới
 
-IF OBJECT_ID('trg_CheckExpirationDate') IS NOT NULL
-DROP TRIGGER trg_CheckExpirationDate;
-GO
+--IF OBJECT_ID('trg_CheckExpirationDate') IS NOT NULL
+--DROP TRIGGER trg_CheckExpirationDate;
+--GO
 
 CREATE TRIGGER trg_CheckExpirationDate
 ON Muon_tra
