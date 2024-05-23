@@ -40,6 +40,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.lblTittle = new System.Windows.Forms.Label();
             this.panelSach = new System.Windows.Forms.Panel();
+            this.btnResetTxtSach = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dGVSach = new System.Windows.Forms.DataGridView();
             this.dtpNamXB = new System.Windows.Forms.DateTimePicker();
@@ -63,6 +64,7 @@
             this.lblTenSach = new System.Windows.Forms.Label();
             this.lblMaSach = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRestTxtTheThuVien = new System.Windows.Forms.Button();
             this.dGVTheThuVien = new System.Windows.Forms.DataGridView();
             this.dtpNgayHH = new System.Windows.Forms.DateTimePicker();
             this.dtpNgayDK = new System.Windows.Forms.DateTimePicker();
@@ -83,6 +85,7 @@
             this.lblHoTen = new System.Windows.Forms.Label();
             this.lblMaThe = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnResetTxtMuonTra = new System.Windows.Forms.Button();
             this.cbxTrangThai = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTienPhat = new System.Windows.Forms.TextBox();
@@ -129,6 +132,7 @@
             // panelSach
             // 
             this.panelSach.BackColor = System.Drawing.Color.Azure;
+            this.panelSach.Controls.Add(this.btnResetTxtSach);
             this.panelSach.Controls.Add(this.label1);
             this.panelSach.Controls.Add(this.dGVSach);
             this.panelSach.Controls.Add(this.dtpNamXB);
@@ -158,6 +162,19 @@
             this.panelSach.TabIndex = 23;
             this.panelSach.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSach_Paint);
             // 
+            // btnResetTxtSach
+            // 
+            this.btnResetTxtSach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnResetTxtSach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetTxtSach.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnResetTxtSach.Location = new System.Drawing.Point(112, 373);
+            this.btnResetTxtSach.Name = "btnResetTxtSach";
+            this.btnResetTxtSach.Size = new System.Drawing.Size(77, 33);
+            this.btnResetTxtSach.TabIndex = 25;
+            this.btnResetTxtSach.Text = "Reset";
+            this.btnResetTxtSach.UseVisualStyleBackColor = false;
+            this.btnResetTxtSach.Click += new System.EventHandler(this.btnResetTxtSach_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -186,7 +203,7 @@
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ButtonHighlight;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -194,6 +211,7 @@
             this.dGVSach.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.dGVSach.Location = new System.Drawing.Point(486, 18);
             this.dGVSach.Name = "dGVSach";
+            this.dGVSach.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -206,6 +224,7 @@
             this.dGVSach.RowTemplate.Height = 24;
             this.dGVSach.Size = new System.Drawing.Size(1359, 329);
             this.dGVSach.TabIndex = 32;
+            this.dGVSach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVSach_CellClick);
             this.dGVSach.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVSach_CellValueChanged);
             // 
             // dtpNamXB
@@ -223,7 +242,7 @@
             this.btnSuaSach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnSuaSach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaSach.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSuaSach.Location = new System.Drawing.Point(1091, 373);
+            this.btnSuaSach.Location = new System.Drawing.Point(1203, 373);
             this.btnSuaSach.Name = "btnSuaSach";
             this.btnSuaSach.Size = new System.Drawing.Size(77, 33);
             this.btnSuaSach.TabIndex = 33;
@@ -236,7 +255,7 @@
             this.btnXoaSach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnXoaSach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoaSach.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnXoaSach.Location = new System.Drawing.Point(1268, 373);
+            this.btnXoaSach.Location = new System.Drawing.Point(957, 373);
             this.btnXoaSach.Name = "btnXoaSach";
             this.btnXoaSach.Size = new System.Drawing.Size(77, 33);
             this.btnXoaSach.TabIndex = 34;
@@ -249,7 +268,7 @@
             this.btnThemSach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnThemSach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemSach.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnThemSach.Location = new System.Drawing.Point(207, 373);
+            this.btnThemSach.Location = new System.Drawing.Point(276, 373);
             this.btnThemSach.Name = "btnThemSach";
             this.btnThemSach.Size = new System.Drawing.Size(77, 33);
             this.btnThemSach.TabIndex = 31;
@@ -419,6 +438,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Azure;
+            this.panel1.Controls.Add(this.btnRestTxtTheThuVien);
             this.panel1.Controls.Add(this.dGVTheThuVien);
             this.panel1.Controls.Add(this.dtpNgayHH);
             this.panel1.Controls.Add(this.dtpNgayDK);
@@ -445,6 +465,19 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // btnRestTxtTheThuVien
+            // 
+            this.btnRestTxtTheThuVien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnRestTxtTheThuVien.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestTxtTheThuVien.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnRestTxtTheThuVien.Location = new System.Drawing.Point(64, 321);
+            this.btnRestTxtTheThuVien.Name = "btnRestTxtTheThuVien";
+            this.btnRestTxtTheThuVien.Size = new System.Drawing.Size(77, 33);
+            this.btnRestTxtTheThuVien.TabIndex = 24;
+            this.btnRestTxtTheThuVien.Text = "Reset";
+            this.btnRestTxtTheThuVien.UseVisualStyleBackColor = false;
+            this.btnRestTxtTheThuVien.Click += new System.EventHandler(this.btnRestTxtTheThuVien_Click);
+            // 
             // dGVTheThuVien
             // 
             this.dGVTheThuVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -462,7 +495,7 @@
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ButtonFace;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -470,6 +503,7 @@
             this.dGVTheThuVien.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.dGVTheThuVien.Location = new System.Drawing.Point(362, 33);
             this.dGVTheThuVien.Name = "dGVTheThuVien";
+            this.dGVTheThuVien.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -549,7 +583,7 @@
             this.btnThemTheThuVien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnThemTheThuVien.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemTheThuVien.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnThemTheThuVien.Location = new System.Drawing.Point(169, 319);
+            this.btnThemTheThuVien.Location = new System.Drawing.Point(211, 319);
             this.btnThemTheThuVien.Name = "btnThemTheThuVien";
             this.btnThemTheThuVien.Size = new System.Drawing.Size(77, 33);
             this.btnThemTheThuVien.TabIndex = 8;
@@ -677,6 +711,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Azure;
+            this.panel2.Controls.Add(this.btnResetTxtMuonTra);
             this.panel2.Controls.Add(this.cbxTrangThai);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtTienPhat);
@@ -702,6 +737,19 @@
             this.panel2.Size = new System.Drawing.Size(1010, 380);
             this.panel2.TabIndex = 12;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // btnResetTxtMuonTra
+            // 
+            this.btnResetTxtMuonTra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnResetTxtMuonTra.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetTxtMuonTra.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnResetTxtMuonTra.Location = new System.Drawing.Point(46, 321);
+            this.btnResetTxtMuonTra.Name = "btnResetTxtMuonTra";
+            this.btnResetTxtMuonTra.Size = new System.Drawing.Size(77, 33);
+            this.btnResetTxtMuonTra.TabIndex = 25;
+            this.btnResetTxtMuonTra.Text = "Reset";
+            this.btnResetTxtMuonTra.UseVisualStyleBackColor = false;
+            this.btnResetTxtMuonTra.Click += new System.EventHandler(this.btnResetTxtMuonTra_Click);
             // 
             // cbxTrangThai
             // 
@@ -752,7 +800,7 @@
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ButtonFace;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -760,6 +808,7 @@
             this.dGVMuonTra.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.dGVMuonTra.Location = new System.Drawing.Point(274, 35);
             this.dGVMuonTra.Name = "dGVMuonTra";
+            this.dGVMuonTra.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -772,6 +821,7 @@
             this.dGVMuonTra.RowTemplate.Height = 24;
             this.dGVMuonTra.Size = new System.Drawing.Size(718, 268);
             this.dGVMuonTra.TabIndex = 20;
+            this.dGVMuonTra.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVMuonTra_CellClick);
             this.dGVMuonTra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVMuonTra_CellContentClick);
             this.dGVMuonTra.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGVMuonTra_CellValueChanged);
             // 
@@ -963,9 +1013,9 @@
             this.about.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.about.Location = new System.Drawing.Point(14, 9);
             this.about.Name = "about";
-            this.about.Size = new System.Drawing.Size(264, 15);
+            this.about.Size = new System.Drawing.Size(285, 15);
             this.about.TabIndex = 0;
-            this.about.Text = "Designed & Programmed by MKhue and HThanh";
+            this.about.Text = "Designed and Programmed by MKhue and HThanh";
             // 
             // FormMain
             // 
@@ -1071,5 +1121,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label about;
+        private System.Windows.Forms.Button btnRestTxtTheThuVien;
+        private System.Windows.Forms.Button btnResetTxtMuonTra;
+        private System.Windows.Forms.Button btnResetTxtSach;
     }
 }

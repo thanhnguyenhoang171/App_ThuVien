@@ -12,8 +12,8 @@ namespace DTO
         private string tenSach;
         private string tenTacGia;
         private string theLoai;
-        private int soLuong;
         private string moTa;
+        private int soLuong;
         private decimal giaSach;
         private int namXB;
 
@@ -28,11 +28,11 @@ namespace DTO
         public string TheLoai
         { get { return theLoai; } set { theLoai = value; } }
 
+        public string MoTa
+        { get { return moTa; } set {  moTa = value; } }
         public int SoLuong
         { get { return soLuong; } set { soLuong = value; } }
 
-        public string MoTa
-        { get { return moTa; } set {  moTa = value; } }
 
         public decimal GiaSach
         { get { return giaSach; } set { giaSach = value; } }
@@ -40,22 +40,14 @@ namespace DTO
         public int NamXB
         { get { return namXB; } set {  namXB = value; } }
 
-        public Sach(string maSach, string tenSach, string tenTacGia, string theLoai, int soLuong, string moTa, decimal giaSach, int namXB)
+        public Sach(string maSach, string tenSach, string tenTacGia, string theLoai, string moTa, int soLuong, decimal giaSach, int namXB)
         {
             this.maSach = maSach;
             this.tenSach = tenSach;
             this.tenTacGia = tenTacGia;
             this.theLoai = theLoai;
-            this.soLuong = soLuong;
             this.moTa = moTa;
-            this.giaSach = giaSach;
-            this.namXB = namXB;
-            this.maSach = maSach;
-            this.tenSach = tenSach;
-            this.tenTacGia = tenTacGia;
-            this.theLoai = theLoai;
             this.soLuong = soLuong;
-            this.moTa = moTa;
             this.giaSach = giaSach;
             this.namXB = namXB;
         }
