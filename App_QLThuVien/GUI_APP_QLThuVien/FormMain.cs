@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +27,8 @@ namespace GUI_APP_QLThuVien
             SachBUS.Instance.Xem(dGVSach);
             TheThuVienBUS.Instance.Xem(dGVTheThuVien);
             MuonTraBUS.Instance.Xem(dGVMuonTra);
+
+            btnSuaTheThuVien.Enabled = false;
         }
 
         private void LamMoiTextbox ()
@@ -122,15 +125,33 @@ namespace GUI_APP_QLThuVien
             if (KTra_ThayDoiDLSach())
             {
                 DataGridViewRow row = dGVSach.CurrentRow;
-                // Cập nhật lại hàng trong DataGridView
+            
                 row.Cells[0].Value = txtMaSach.Text;
                 row.Cells[1].Value = txtTenSach.Text;
                 row.Cells[2].Value = txtTacGia.Text;
                 row.Cells[3].Value = txtTheLoai.Text;
                 row.Cells[4].Value = txtMoTa.Text;
-                row.Cells[5].Value = Convert.ToInt32(txtSoLuong.Text);
-                row.Cells[6].Value = decimal.TryParse(txtGia.Text, out decimal giaSach) ? giaSach : 0;
               
+                if (int.TryParse(txtSoLuong.Text, out int soLuong) && soLuong >=0)
+                {
+                    row.Cells[5].Value = soLuong;
+                }
+                else
+                {
+                    MessageBox.Show("Giá trị số lượng không hợp lệ, phải là số nguyên không âm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
+               
+                if (decimal.TryParse(txtGia.Text, out decimal giaSach) && giaSach>=0)
+                {
+                    row.Cells[6].Value = giaSach;
+                }
+                else
+                {
+                    MessageBox.Show("Giá trị giá sách không hợp lệ, phải là số thập phân không âm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
+
                 row.Cells[7].Value = Convert.ToInt32(dtpNamXB.Value.Year);
 
 
@@ -139,16 +160,22 @@ namespace GUI_APP_QLThuVien
                 if (SachBUS.Instance.Sua(dGVSach))
                 {
                     MessageBox.Show("Sửa dữ liệu Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
+                    SachBUS.Instance.Xem(dGVSach);
                     LamMoiTextbox();
+                    btnThemSach.Enabled = true;
+                    btnSuaSach.Enabled = false;
                     txtMaSach.ReadOnly = false;
 
                 }
                 else
                 {
                     MessageBox.Show("Sửa dữ liệu Sách thất bại! \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-      
+                    SachBUS.Instance.Xem(dGVSach);
+                    btnSuaSach.Enabled = true;
+                    txtMaSach.ReadOnly = true;
+
                 }
-                SachBUS.Instance.Xem(dGVSach);
                   
 
             }
@@ -156,7 +183,15 @@ namespace GUI_APP_QLThuVien
             {
                 // Hiển thị thông báo nếu không có thay đổi dữ liệu
                 MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LamMoiTextbox();
+                btnSuaSach.Enabled=false;
+                btnThemSach.Enabled = true;
+                txtMaSach.ReadOnly = false;
+
             }
+       
+           
+
         }
 
         private void btnXoaSach_Click(object sender, EventArgs e)
@@ -165,12 +200,19 @@ namespace GUI_APP_QLThuVien
             if (SachBUS.Instance.Xoa(dGVSach))
             {
                 MessageBox.Show("Xoá dữ liệu Sách thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+     
+            
             }
             else
             {
                 MessageBox.Show("Không thể xoá Sách này vì vẫn còn giao dịch Mượn Trả chưa hoàn thành.", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           
             }
+            btnSuaSach.Enabled = false;
+            btnThemSach.Enabled = true;
+            LamMoiTextbox();
             MuonTraBUS.Instance.Xem(dGVMuonTra);
+            txtMaSach.ReadOnly = false;
         }
 
         private void btnThemSach_Click(object sender, EventArgs e)
@@ -230,7 +272,7 @@ namespace GUI_APP_QLThuVien
                 }
                 if (!decimal.TryParse(txtGia.Text, out giaSach) || giaSach < 0)
                 {
-                    MessageBox.Show("Giá Sách phải số âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Giá Sách phải số không âm", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (namXB.ToString().Length > 4)
@@ -323,22 +365,35 @@ namespace GUI_APP_QLThuVien
                 {
                     MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
     
+                   TheThuVienBUS.Instance.Xem(dGVTheThuVien);
                     LamMoiTextbox();
+                    btnSuaTheThuVien.Enabled = false;
+                    btnThemTheThuVien.Enabled = true;
                     txtMaThe.ReadOnly = false;
                 }
                 else
                 {
                     MessageBox.Show("Sửa dữ liệu Thẻ Thư Viện thất bại!. \nVui lòng kiểm tra lại dữ liệu nhập vào", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    TheThuVienBUS.Instance.Xem(dGVTheThuVien);
+                    btnSuaTheThuVien.Enabled = true;
+                    txtMaThe.ReadOnly = true;
                 }
-                TheThuVienBUS.Instance.Xem(dGVTheThuVien);
 
             }
             else
             {
                 // Hiển thị thông báo nếu không có thay đổi dữ liệu
                 MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LamMoiTextbox();
+                btnSuaTheThuVien.Enabled=false;
+                btnThemTheThuVien.Enabled = true;
+                txtMaThe.ReadOnly = false;
             }
 
+         
+        
+      
         }
 
         private void btnThemTheThuVien_Click(object sender, EventArgs e)
@@ -412,14 +467,18 @@ namespace GUI_APP_QLThuVien
             {
                 MessageBox.Show("Xoá dữ liệu Thẻ Thư Viện thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MuonTraBUS.Instance.Xem(dGVMuonTra);
+             
      
             }
             else
             {
                 MessageBox.Show("Xoá dữ liệu Thẻ Thư Viện thất bại thành công!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-  
-
             }
+                btnThemTheThuVien.Enabled = true;
+                btnSuaTheThuVien.Enabled = false;
+            LamMoiTextbox() ;
+            txtMaThe.ReadOnly = false;
+
         }
 
         private void panelSach_Paint(object sender, PaintEventArgs e)
@@ -501,12 +560,16 @@ namespace GUI_APP_QLThuVien
             if (MuonTraBUS.Instance.Xoa(dGVMuonTra))
             {
                 MessageBox.Show("Xoá dữ liệu Mượn Trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          
             }
             else
             {
                 MessageBox.Show("Xoá dữ liệu Mượn Trả thất bại!", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
+                btnSuaMuonTra.Enabled = false;
+                btnThemMuonTra.Enabled = true;
+            LamMoiTextbox() ;
+            txtMaGD.ReadOnly = false;
         }
         private bool KTra_ThayDoiDLMuonTra()
         {
@@ -560,31 +623,48 @@ namespace GUI_APP_QLThuVien
                     row.Cells[3].Value = Convert.ToDateTime(dtpNgayMuon.Value);
                     row.Cells[4].Value = Convert.ToDateTime(dtpNgayTra.Value);
                     row.Cells[6].Value = cbxTrangThai.Text;
-                    row.Cells[5].Value = decimal.TryParse(txtTienPhat.Text, out decimal tienPhat) ? tienPhat : 0; // Chuyển đổi txtTienPhat.Text sang decimal
-
-                    // Gọi phương thức Sua để lưu thay đổi vào cơ sở dữ liệu (nếu cần)
-                    if (MuonTraBUS.Instance.Sua(dGVMuonTra))
+                //row.Cells[5].Value = decimal.TryParse(txtTienPhat.Text, out decimal tienPhat) ? tienPhat : 0; 
+                // Kiểm tra và gán giá trị cho ô thứ 5 nếu nó là decimal
+                if (decimal.TryParse(txtTienPhat.Text, out decimal tienPhat) && tienPhat >=0)
+                {
+                    row.Cells[5].Value = tienPhat;
+                }
+                else
+                {
+                    MessageBox.Show("Giá trị tiền phạt không hợp lệ, phải là số không âm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Không tiếp tục nếu giá trị không hợp lệ
+                }
+                if (MuonTraBUS.Instance.Sua(dGVMuonTra))
                     {
                         MessageBox.Show("Sửa dữ liệu Mượn trả thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        SachBUS.Instance.Xem(dGVSach);
+                        MuonTraBUS.Instance.Xem(dGVMuonTra);
                         LamMoiTextbox();
-                         txtMaGD.ReadOnly = false;
+                         btnSuaMuonTra.Enabled = false;
+                        btnThemMuonTra.Enabled = true;
+                    txtMaGD.ReadOnly = false;
+
                 }
                     else
                     {
                         MessageBox.Show("Không thể sửa đổi Mượn trả có thể do số lượng hiện có của sách đã hết hoặc bạn đã nhập sai dữ liệu sửa đổi", "Lỗi!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                         MuonTraBUS.Instance.Xem(dGVMuonTra);
+                        btnSuaMuonTra.Enabled = true;
+                    txtMaGD.ReadOnly = true;
+
                     }
 
-                    // Làm mới DataGridView để hiển thị dữ liệu cập nhật
-                    MuonTraBUS.Instance.Xem(dGVMuonTra);
 
                 }
                 else
                 {
                     // Hiển thị thông báo nếu không có thay đổi dữ liệu
                     MessageBox.Show("Không có dữ liệu nào được chỉnh sửa!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            
+                    btnSuaMuonTra.Enabled = false;
+                    btnThemMuonTra.Enabled= true;
+                     LamMoiTextbox();
+                    txtMaGD.ReadOnly = false;
+            }
+      
         }
 
         private void dGVMuonTra_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -618,6 +698,8 @@ namespace GUI_APP_QLThuVien
         {
             if (e.RowIndex >= 0)
             {
+                btnThemTheThuVien.Enabled = false;
+                btnSuaTheThuVien.Enabled = true;
                 txtMaThe.ReadOnly = true;
                 DataGridViewRow row = dGVTheThuVien.Rows[e.RowIndex];
         
@@ -636,6 +718,8 @@ namespace GUI_APP_QLThuVien
         {
             if (e.RowIndex >= 0)
             {
+                btnThemMuonTra.Enabled = false;
+                btnSuaMuonTra.Enabled=true;
                txtMaGD.ReadOnly = true;
                 DataGridViewRow row = dGVMuonTra.Rows[e.RowIndex];
                 // Lấy dữ liệu từ các ô trong hàng được chọn và đặt vào các TextBox và điều khiển khác
@@ -654,6 +738,8 @@ namespace GUI_APP_QLThuVien
         {
             if (e.RowIndex >= 0)
             {
+                btnThemSach.Enabled= false;
+                btnSuaSach.Enabled=true; 
                 txtMaSach.ReadOnly = true;
                 DataGridViewRow row = dGVSach.Rows[e.RowIndex];
                 // Lấy dữ liệu từ các ô trong hàng được chọn và đặt vào các TextBox và điều khiển khác
@@ -680,8 +766,15 @@ namespace GUI_APP_QLThuVien
             txtMoTa.Clear();
             txtSoLuong.Clear();
             txtGia.Clear();
+            txtTacGia.Clear();
             txtMaSach.ReadOnly = false;
-            
+            btnSuaSach.Enabled = false;
+            btnThemSach.Enabled = true;
+            btnSuaTheThuVien.Enabled = false;
+            btnThemTheThuVien.Enabled = true;
+            btnSuaMuonTra.Enabled= false;
+            btnThemMuonTra.Enabled = true;
+
         }
 
         private void btnRestTxtTheThuVien_Click(object sender, EventArgs e)
@@ -692,6 +785,12 @@ namespace GUI_APP_QLThuVien
             txtDienThoai.Clear();
             txtEmail.Clear();
             txtMaThe.ReadOnly = false;
+            btnSuaTheThuVien.Enabled = false;
+            btnThemTheThuVien.Enabled = true;
+            btnSuaSach.Enabled = false;
+            btnThemSach.Enabled = true;
+            btnSuaMuonTra.Enabled = false;
+            btnThemMuonTra.Enabled = true;
 
         }
 
@@ -703,6 +802,12 @@ namespace GUI_APP_QLThuVien
             txtTienPhat.Clear();
             cbxTrangThai.SelectedIndex = -1;
             txtMaGD.ReadOnly = false;
+            btnSuaMuonTra.Enabled = false;
+            btnThemMuonTra.Enabled = true;
+            btnSuaTheThuVien.Enabled = false;
+            btnThemTheThuVien.Enabled = true;
+            btnSuaSach.Enabled = false;
+            btnThemSach.Enabled = true;
         }
     }
 }
